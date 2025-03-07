@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/jsp">
+	<excludes>
+		<pattern>/js/*</pattern>
+		<pattern>/css/*</pattern>
+		<pattern>/images/*</pattern>	
+	</excludes>
+	
+    <decorator name="adminLeftMenu" 	page="/WEB-INF/jsp/layout/admin/left_menu.jsp"/>
+	<decorator name="adminHeader" 		page="/WEB-INF/jsp/layout/admin/header.jsp"/>
+	<decorator name="adminFooter" 		page="/WEB-INF/jsp/layout/admin/footer.jsp"/>
+	<decorator name="adminLayout" 		page="/WEB-INF/jsp/layout/admin/layout.jsp">
+       <pattern>/admin/*</pattern>
+    </decorator>
+	
+	<decorator name="loginLayout" 	page="/WEB-INF/jsp/layout/admin/login_layout.jsp">
+       <pattern>/login.do</pattern>
+       <pattern>/*/login.do</pattern>
+       <pattern>/logout.do</pattern>
+       <pattern>/*/logout.do</pattern>
+    </decorator>
+    
+<!--     <decorator name="header" 	page="/header.do"/> -->
+<!-- 	<decorator name="footer" 	page="/footer.do"/> -->
+    <decorator name="layout" 	page="/WEB-INF/jsp/layout/front/layout.jsp">
+    	<pattern>/*</pattern>
+    </decorator> 
+	
+</decorators>
