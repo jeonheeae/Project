@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/* S : 슬라이드 */
+.carousel {
+    margin-bottom: 8rem !important;
+}
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bs-body-color);
+}
+.carousel-caption.slide03{
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+.carousel-caption h2 {
+    margin-bottom: 20px;
+}
+.carousel-caption .btn {
+    margin-top: 30px;
+}
+/* E : 슬라이드 */
+
+.row {
+    margin-bottom: 8rem;
+}
+/* S : 소개 */
+.intro p {
+    font-size: 1.25rem;
+}
+/* E : 소개 */
+.featurette h3 {
+    margin-bottom: 5rem;
+}
+.featurette h4 {
+    font-size: 1.5rem;
+}
+.bi-star-fill {
+    color: #FBBF24;
+}
