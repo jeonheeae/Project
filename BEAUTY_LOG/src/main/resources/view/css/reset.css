@@ -14,7 +14,7 @@
     }
     html, body {
         width: 100%;
-        height: 100%;
+        height: auto;
         font-size: 100%;
         cursor: default;
     }
@@ -164,6 +164,7 @@
 
 /* S : scss 변경 ----------------------------------------------- */
     :root {
+        --bs-primary: #E11D48;
         --bs-body-color: #1F2937;
     }
 
@@ -174,7 +175,7 @@
         --bs-btn-hover-color: #fff;
         --bs-btn-hover-bg: #cc1a41;
         --bs-btn-hover-border-color: #cc1a41;
-        --bs-btn-focus-shadow-rgb: 49, 132, 253;
+        --bs-btn-focus-shadow-rgb: 225, 29, 72;
         --bs-btn-active-color: #fff;
         --bs-btn-active-bg: #cc1a41;
         --bs-btn-active-border-color: #cc1a41;
@@ -183,13 +184,64 @@
         --bs-btn-disabled-bg: #E11D48;
         --bs-btn-disabled-border-color: #E11D48;
     }
+
+    .btn-outline-primary {
+        --bs-btn-color: #E11D48;
+        --bs-btn-border-color: #E11D48;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #f55275;
+        --bs-btn-hover-border-color: #f55275;
+        --bs-btn-focus-shadow-rgb: 225, 29, 72;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #f55275;
+        --bs-btn-active-border-color: #f55275;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #E11D48;
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: #E11D48;
+        --bs-gradient: none;
+    }
+    .form-check-input:checked {
+        background-color: #E11D48;
+        border-color: #E11D48;
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 .25rem rgba(225, 29, 72, .25);
+    }
+
+    .page-link, .page-link:hover {
+        color: #E11D48;
+    }
+    .page-link:focus {
+        color: #fff;
+        background-color: #E11D48;
+        border-color: #E11D48;
+        box-shadow: none;
+    }
 /* E : scss 변경 ----------------------------------------------- */
 
 /* S : main ----------------------------------------------- */
     .main {
-        margin-top: 10px;
+        margin: 60px auto 100px;
     }
 /* E : main ----------------------------------------------- */
+
+
+/* S : 기본 레이아웃 수정 */
+    h3 {
+        margin-bottom: 2rem;
+    }
+    h4 {
+        font-size: 1.31rem;
+    }
+    .bi-star, .bi-star-fill, .bi-star-half {
+        color: #FBBF24;
+    }
+    .form-label {
+        font-weight: 600;
+    }
+/* E : 기본 레이아웃 수정 */
 
 
 /* S : hover ----------------------------------------------- */
