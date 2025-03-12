@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-public class MainController {
+@RequestMapping(value="front")
+@Controller("frontReview") 
+public class ReviewController {
 	
-	
-	@RequestMapping(value="/index.do", method = {RequestMethod.GET})
-	public ModelAndView frontMain(
+	// 이벤트 관리
+	@RequestMapping(value="/review.do", method = {RequestMethod.GET})
+	public ModelAndView review(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			HttpSession session
 			)throws Exception {
-		ModelAndView mav = new ModelAndView("front/main");
+		ModelAndView mav = new ModelAndView("front/review/review");
 		
 		return mav;
 	}
+	
 	
 }

@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@RequestMapping(value="front")
 @Controller
-public class MainController {
-	
-	
-	@RequestMapping(value="/index.do", method = {RequestMethod.GET})
-	public ModelAndView frontMain(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			HttpSession session
-			)throws Exception {
-		ModelAndView mav = new ModelAndView("front/main");
-		
-		return mav;
-	}
-	
+public class QnaController {
+
+    // Q&A 화면
+    @RequestMapping(value="/qna.do", method = {RequestMethod.GET})
+    public ModelAndView qna(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    ) throws Exception {
+        ModelAndView mav = new ModelAndView("front/qna/qna");
+
+        return mav;
+    }
 }
