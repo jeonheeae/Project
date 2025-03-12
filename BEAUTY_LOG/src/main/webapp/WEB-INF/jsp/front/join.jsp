@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -30,10 +29,11 @@
     <meta name="title" content="Beauty Log">
     <meta name="keyword" content="Beauty Log, 뷰티, 화장품, 뷰티 랭킹, 포트폴리오, 개발자">
     <meta name="description" content="">
+    <!-- E : Beauty Log 설명 -->
 
     <!-- S : OG 오픈그래프 (카카오톡 미리보기) -->
     <meta property="og:url" content="http://">
-    <meta property="og:image" content="../view/img/thumbnail.svg">
+    <meta property="og:image" content="<c:url value='/WEB-INF/resources/images/front/main/thumbnail.svg' />">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Beauty Log">
     <meta property="og:site_name" content="Beauty Log">
@@ -41,7 +41,6 @@
     <!-- E : OG 오픈그래프 (카카오톡 미리보기) -->
 
     <title>Beauty Log</title>
-    <!-- E : Beauty Log 설명 -->
 
     <!-- S : bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -50,7 +49,7 @@
 
     <!-- S : CSS -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/reset.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/sub.css">
     <!-- E : CSS -->
 
     <style>
@@ -162,108 +161,80 @@
         </header>
         <!-- E : header -->
 
-        <main class="main">
-            <!-- 슬라이드 -->
-            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/slide01.jpg" alt="슬라이드">
-                        <div class="container">
-                            <div class="carousel-caption slide01 text-start">
-                                <h2 class="fw-bold">지금 가장 HOT한 뷰티 아이템</h2>
-                                <p class="fw-medium">실시간 인기 뷰티 랭킹을 확인하고, 베스트 제품을 만나보세요!<br> 매일 업데이트되는 트렌디한 뷰티 정보를 놓치지 마세요.</p>
-                                <a class="btn btn-lg btn-primary" href="#">Rank로 이동</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/slide02.jpg" alt="슬라이드">
-                        <div class="container">
-                            <div class="carousel-caption slide02 text-start">
-                                <h2 class="fw-bold">"솔직한 리뷰, 가짜 없는 리얼 후기!</h2>
-                                <p class="fw-medium">수천 개의 실제 사용자 리뷰를 확인하고 나에게 맞는 뷰티템을 선택하세요.<br> 뷰티 경험을 공유하고 함께 성장하는 커뮤니티!</p>
-                                <a class="btn btn-lg btn-primary" href="#">Review로 이동</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/slide03.jpg" alt="슬라이드">
-                        <div class="container">
-                            <div class="carousel-caption slide03 text-start text-white">
-                                <h2 class="fw-bold">하루 한 번! 출석하면 보상이 쏟아진다</h2>
-                                <p class="fw-medium">매일 출석하고 포인트, 쿠폰, 특별 혜택까지 받아가세요!<br> 꾸준한 출석이 곧 리워드로 돌아옵니다. 지금 참여하세요!</p>
-                                <a class="btn btn-lg btn-primary" href="#">Event로 이동</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"></span>
-                </button>
-            </div>
-            <!-- 슬라이드 끝 -->
+        <!-- S : 회원가입 -->
+        <main class="main form-signin w-100">
+            <form class="pt-5">
+                <h3 class="fw-bold text-center">회원가입</h3>
 
-            <div class="container marketing">
-                <!-- S : 소개 -->
-                <div class="row intro text-center">
-                    <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro01.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                        <p class="fw-semibold mt-4">🏆 랭킹</p>
-                    </div>
-                    <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro02.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                        <p class="fw-semibold mt-4">🎖️ 뷰티 어워드</p>
-                    </div>
-                    <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro03.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                        <p class="fw-semibold mt-4">🧴 베스트 신제품</p>
-                    </div>
-                    <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro04.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                        <p class="fw-semibold mt-4">💆🏻 효능/효과</p>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="아이디 입력">
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword5" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="inputPassword5" placeholder="비밀번호 입력">
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword5" class="form-label">비밀번호 확인</label>
+                    <input type="password" class="form-control" id="inputPassword5" placeholder="비밀번호 다시 입력">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름 입력">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">전화번호</label>
+                    <div class="row g-2">
+                        <div class="col">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>010</option>
+                                <option value="1">02</option>
+                                <option value="2">032</option>
+                                <option value="3">055</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input type="num" class="form-control" id="exampleFormControlInput1" placeholder="0000">
+                        </div>
+                        <div class="col">
+                            <input type="num" class="form-control" id="exampleFormControlInput1" placeholder="0000">
+                        </div>
                     </div>
                 </div>
-                <!-- E : 소개 -->
-
-                <!-- S : 조회수 급상승 -->
-                <div class="row featurette">
-                    <h3 class="fw-bold">조회수 급상승</h3>
-                    <div class="col-md-4">
-                        <h4 class="fw-semibold mb-2">제품명01</h4>
-                        <p>가격 : 23,900원</p>
-                        <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/product01.jpg" class="bd-placeholder-img" width="400" height="400">
-                    </div>
-                    <div class="col-md-4">
-                        <h4 class="fw-semibold mb-2">제품명02</h4>
-                        <p>가격 : 23,900원</p>
-                        <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/product02.jpg" class="bd-placeholder-img" width="400" height="400">
-                    </div>
-                    <div class="col-md-4">
-                        <h4 class="fw-semibold mb-2">제품명03</h4>
-                        <p>가격 : 23,900원</p>
-                        <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/product03.jpg" class="bd-placeholder-img" width="400" height="400">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">이메일</label>
+                    <div class="row g-2 align-items-center">
+                        <div class="col-5">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이메일 아이디">
+                        </div>
+                        <div class="col-1">
+                            <span>@</span>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>이메일 선택</option>
+                                <option value="1">naver.com</option>
+                                <option value="2">gmail.com</option>
+                                <option value="3">daum.net</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <!-- S : 조회수 급상승 -->
-            </div>
+                <div class="form-check text-start my-3">
+                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                    <label class="form-check-label fw-medium" for="flexCheckDefault">약관에 동의합니다.</label>
+                </div>
+                <div class="btn-group w-100">
+                    <button class="btn btn-outline-primary" type="submit">이전</button>
+                    <button class="btn btn-primary" type="submit">다음</button>
+                </div>
+            </form>
         </main>
+        <!-- E : 회원가입 -->
 
         <!-- S : footer -->
-        <div class="container w-100">
-            <footer class="py-3 my-4">
+        <div class="container">
+            <footer class="pt-5">
                 <ul class="d-flex justify-content-center opacity-75">
                     <li class="px-2"><i class="bi bi-instagram"></i></li>
                     <li class="px-2"><i class="bi bi-facebook"></i></li>
@@ -287,8 +258,7 @@
         </div>
         <!-- E : footer -->
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcYZEqDbrHqkCK0m6k" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
