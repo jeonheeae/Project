@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
 
     <!-- S : 파비콘 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/resources/images/front/favicon/apple-touch-icon.png'/>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/resources/images/front/favicon/favicon-32x32.png'/>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/front/favicon/favicon-16x16.png'/>">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/resources/images/front/favicon/android-chrome-192x192.png'/>">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/resources/images/front/favicon/android-chrome-512x512.png'/>">
-    <link rel="manifest" href="<c:url value='/resources/images/front/favicon/site.webmanifest'/>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/front/favicon/apple-touch-icon.png'/>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/front/favicon/favicon-32x32.png'/>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/front/favicon/favicon-16x16.png'/>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/front/favicon/android-chrome-192x192.png'/>">
+    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/front/favicon/android-chrome-512x512.png'/>">
+    <link rel="manifest" href="<c:url value='/images/front/favicon/site.webmanifest'/>">
     <!-- E : 파비콘 -->
 
     <!-- S : 네이버 필수 메타 태그 -->
@@ -49,8 +49,8 @@
     <!-- E : bootstrap -->
 
     <!-- S : CSS -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/reset.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/front/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/front/main.css">
     <!-- E : CSS -->
 
     <style>
@@ -123,7 +123,7 @@
             <nav class="navbar navbar-expand-md fixed-top bg-white shadow-sm">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="<c:url value='/index.do'/>">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/common/logo_b.svg" alt="로고">
+                        <img src="${pageContext.request.contextPath}/images/front/common/logo_b.svg" alt="로고">
                     </a>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -172,7 +172,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/slide01.jpg" alt="슬라이드">
+                        <img src="${pageContext.request.contextPath}/images/front/main/slide01.jpg" alt="슬라이드">
                         <div class="container">
                             <div class="carousel-caption slide01 text-start">
                                 <h2 class="fw-bold">지금 가장 HOT한 뷰티 아이템</h2>
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/slide02.jpg" alt="슬라이드">
+                        <img src="${pageContext.request.contextPath}/images/front/main/slide02.jpg" alt="슬라이드">
                         <div class="container">
                             <div class="carousel-caption slide02 text-start">
                                 <h2 class="fw-bold">"솔직한 리뷰, 가짜 없는 리얼 후기!</h2>
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/slide03.jpg" alt="슬라이드">
+                        <img src="${pageContext.request.contextPath}/images/front/main/slide03.jpg" alt="슬라이드">
                         <div class="container">
                             <div class="carousel-caption slide03 text-start text-white">
                                 <h2 class="fw-bold">하루 한 번! 출석하면 보상이 쏟아진다</h2>
@@ -217,19 +217,19 @@
                 <!-- S : 소개 -->
                 <div class="row intro text-center">
                     <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro01.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                        <img src="${pageContext.request.contextPath}/images/front/main/intro01.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
                         <p class="fw-semibold mt-4">🏆 랭킹</p>
                     </div>
                     <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro02.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                        <img src="${pageContext.request.contextPath}/images/front/main/intro02.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
                         <p class="fw-semibold mt-4">🎖️ 뷰티 어워드</p>
                     </div>
                     <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro03.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                        <img src="${pageContext.request.contextPath}/images/front/main/intro03.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
                         <p class="fw-semibold mt-4">🧴 베스트 신제품</p>
                     </div>
                     <div class="col-lg-3">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/intro04.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                        <img src="${pageContext.request.contextPath}/images/front/main/intro04.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
                         <p class="fw-semibold mt-4">💆🏻 효능/효과</p>
                     </div>
                 </div>
@@ -242,19 +242,19 @@
                         <h4 class="fw-semibold mb-2">제품명01</h4>
                         <p>가격 : 23,900원</p>
                         <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/product01.jpg" class="bd-placeholder-img" width="400" height="400">
+                        <img src="${pageContext.request.contextPath}/images/front/main/product01.jpg" class="bd-placeholder-img" width="400" height="400">
                     </div>
                     <div class="col-md-4">
                         <h4 class="fw-semibold mb-2">제품명02</h4>
                         <p>가격 : 23,900원</p>
                         <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/product02.jpg" class="bd-placeholder-img" width="400" height="400">
+                        <img src="${pageContext.request.contextPath}/images/front/main/product02.jpg" class="bd-placeholder-img" width="400" height="400">
                     </div>
                     <div class="col-md-4">
                         <h4 class="fw-semibold mb-2">제품명03</h4>
                         <p>가격 : 23,900원</p>
                         <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                        <img src="${pageContext.request.contextPath}/resources/images/front/main/product03.jpg" class="bd-placeholder-img" width="400" height="400">
+                        <img src="${pageContext.request.contextPath}/images/front/main/product03.jpg" class="bd-placeholder-img" width="400" height="400">
                     </div>
                 </div>
                 <!-- S : 조회수 급상승 -->

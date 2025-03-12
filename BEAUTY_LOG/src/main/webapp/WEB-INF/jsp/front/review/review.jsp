@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
 
     <!-- S : 파비콘 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/resources/images/front/favicon/apple-touch-icon.png'/>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/resources/images/front/favicon/favicon-32x32.png'/>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/front/favicon/favicon-16x16.png'/>">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/resources/images/front/favicon/android-chrome-192x192.png'/>">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/resources/images/front/favicon/android-chrome-512x512.png'/>">
-    <link rel="manifest" href="<c:url value='/resources/images/front/favicon/site.webmanifest'/>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/front/favicon/apple-touch-icon.png'/>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/front/favicon/favicon-32x32.png'/>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/front/favicon/favicon-16x16.png'/>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/front/favicon/android-chrome-192x192.png'/>">
+    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/front/favicon/android-chrome-512x512.png'/>">
+    <link rel="manifest" href="<c:url value='/images/front/favicon/site.webmanifest'/>">
     <!-- E : 파비콘 -->
 
     <!-- S : 네이버 필수 메타 태그 -->
@@ -48,8 +48,8 @@
     <!-- E : bootstrap -->
 
     <!-- S : CSS -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/reset.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/front/sub.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/front/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/front/sub.css">
     <!-- E : CSS -->
     <style>
         .bd-placeholder-img {
@@ -121,7 +121,7 @@
             <nav class="navbar navbar-expand-md fixed-top bg-white shadow-sm">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="<c:url value='/index.do'/>">
-                        <img src="${pageContext.request.contextPath}/resources/images/front/common/logo_b.svg" alt="로고">
+                        <img src="${pageContext.request.contextPath}/images/front/common/logo_b.svg" alt="로고">
                     </a>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
