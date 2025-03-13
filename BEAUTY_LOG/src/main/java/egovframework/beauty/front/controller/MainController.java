@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 	
-	// 관리자 화면
+	
 	@RequestMapping(value="/index.do", method = {RequestMethod.GET})
 	public ModelAndView frontMain(
 			HttpServletRequest request,
@@ -23,6 +23,5 @@ public class MainController {
 		
 		return mav;
 	}
-	
 	
 }

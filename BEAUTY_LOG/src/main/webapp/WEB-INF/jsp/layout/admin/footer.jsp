@@ -2,15 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 				prefix="c" 			%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" 		prefix="page" 		%>
-<!DOCTYPE html>
-<html lang="ko">
-	<head>
-		<title><decorator:title default="BeautyLog" /></title>	
-		<decorator:head />
-	</head>
-	<page:applyDecorator name="adminHeader" />
-	<page:applyDecorator name="adminLeftMenu" />
-	<decorator:body />
-	<page:applyDecorator name="adminFooter" />
-	</body>
-</html>
+<footer>
+    <div class="footer clearfix text-muted mt-5">
+        <div class="float-start">
+            <p>2025 &copy; Beauty Log</p>
+        </div>
+        <div class="float-end">
+            <p>Crafted with <span class="text-danger"></span>
+                by <a href="#">Beauty Log</a></p>
+        </div>
+    </div>
+</footer>

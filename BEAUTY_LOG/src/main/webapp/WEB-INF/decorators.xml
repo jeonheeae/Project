@@ -8,7 +8,6 @@
 	</excludes>
 	
     <decorator name="adminLeftMenu" 	page="/WEB-INF/jsp/layout/admin/left_menu.jsp"/>
-	<decorator name="adminHeader" 		page="/WEB-INF/jsp/layout/admin/header.jsp"/>
 	<decorator name="adminFooter" 		page="/WEB-INF/jsp/layout/admin/footer.jsp"/>
 	<decorator name="adminLayout" 		page="/WEB-INF/jsp/layout/admin/layout.jsp">
        <pattern>/admin/*</pattern>
