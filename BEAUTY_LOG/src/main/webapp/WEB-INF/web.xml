@@ -49,6 +49,22 @@
     <servlet-name>action</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+<!-- 정적 리소스를 처리하는 서블릿 -->
+<servlet>
+    <servlet-name>resourceServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.resource.ResourceHttpRequestHandler</servlet-class>
+    <init-param>
+        <param-name>locations</param-name>
+        <param-value>/WEB-INF/resources/</param-value>
+    </init-param>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/resources/*</url-pattern>
+</servlet-mapping>
+
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
