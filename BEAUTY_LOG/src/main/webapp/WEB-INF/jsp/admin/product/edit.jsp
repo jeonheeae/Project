@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 				prefix="c" 			%>
 <head>
-	<title>상품 등록</title>
+	<title>상품 수정</title>
 	<script src="${pageContext.request.contextPath }/js/admin/product/edit.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 </head>
