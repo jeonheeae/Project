@@ -48,10 +48,10 @@ public class DefaultVO implements Serializable {
 	private static final long serialVersionUID = -858838578081269359L;
 
 	/** 검색조건 */
-	private String searchCondition = "";
+	private String condition = "";
 
 	/** 검색Keyword */
-	private String searchKeyword = "";
+	private String keyword = "";
 
 	/** 검색사용여부 */
 	private String searchUseYn = "";
