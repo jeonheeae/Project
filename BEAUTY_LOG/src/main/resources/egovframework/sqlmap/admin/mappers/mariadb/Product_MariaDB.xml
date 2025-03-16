@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.beauty.admin.service.mapper.ProductMapper">
+	<resultMap type="default" id="default">
+		<result property="regDt"			column="REG_DT"			/>
+		<result property="updDt"			column="UPD_DT"			/>
+		<result property="stat"				column="STAT"			/>
+	</resultMap>
+	
+	<resultMap id="productVO" type="product" extends="default">
+		<result property="prdSn"			column="PRD_SN"				/>
+		<result property="prdNm"			column="PRD_NM"				/>
+		<result property="prdDesc"			column="PRD_DESC"			/>
+		<result property="prdThum"			column="PRD_THUM"			/>
+	</resultMap>
+
+	<!-- 상품 목록 -->
+	<select id="list" resultMap="productVO">
+		SELECT
+			PRD_SN
+			, PRD_NM
+			, PRD_DESC
+			, PRD_THUM
+			, REG_DT
+			, UPD_DT
+			, STAT
+		FROM
+			TB_PRODUCT
+		WHERE 1=1
+			AND STAT = '1'
+			<if test="keyword != null and !keyword.equals('')">
+				AND PRD_NM LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		ORDER BY PRD_SN DESC			
+		<if test="pageIndex > 0 ">
+			LIMIT #{pageUnit} OFFSET #{firstIndex}
+		</if>
+	</select>
+	
+	<!-- 상품 개수 -->
+	<select id="listCnt" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			TB_PRODUCT
+		WHERE 1=1
+			AND STAT = '1'
+			<if test="keyword != null and !keyword.equals('')">
+				AND PRD_NM LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="add">
+		INSERT INTO TB_PRODUCT
+		(
+			PRD_NM
+			, PRD_DESC
+			, REG_DT
+			, UPD_DT
+			, STAT
+		)VALUES(
+			#{prdNm}
+			, #{prdDesc}
+			, NOW()
+			, NOW()
+			, '1'
+		)
+	</insert>
+	
+	<!-- 상품 수정 화면 -->
+	<select id="get" resultMap="productVO">
+		SELECT
+			PRD_SN
+			, PRD_NM
+			, PRD_DESC
+			, PRD_THUM
+			, REG_DT
+			, UPD_DT
+			, STAT
+		FROM
+			TB_PRODUCT
+		WHERE 1=1
+			AND PRD_SN = #{prdSn}
+	</select>
+	
+	<!-- 상품 수정 처리 -->
+	<update id="edit">
+		UPDATE 
+			TB_PRODUCT
+		SET
+			PRD_NM = #{prdNm}
+			, PRD_DESC = #{prdDesc}
+		WHERE 1=1
+			AND PRD_SN = #{prdSn}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM
+			TB_PRODUCT
+		WHERE 1=1
+			AND PRD_SN = #{prdSn}
+	</delete>
+	
+</mapper>
+

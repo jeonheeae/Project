@@ -52,12 +52,12 @@ public class EgovImgPaginationRenderer extends AbstractPaginationRenderer implem
 	*/
 	public void initVariables() {
 
-		firstPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">" + "<image src='" + servletContext.getContextPath() + "/images/egovframework/cmmn/btn_page_pre10.gif' border=0/></a>&#160;";
-		previousPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">" + "<image src='" + servletContext.getContextPath() + "/images/egovframework/cmmn/btn_page_pre1.gif' border=0/></a>&#160;";
-		currentPageLabel = "<strong>{0}</strong>&#160;";
-		otherPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">{2}</a>&#160;";
-		nextPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">" + "<image src='" + servletContext.getContextPath() + "/images/egovframework/cmmn/btn_page_next1.gif' border=0/></a>&#160;";
-		lastPageLabel = "<a href=\"#\" onclick=\"{0}({1}); return false;\">" + "<image src='" + servletContext.getContextPath() + "/images/egovframework/cmmn/btn_page_next10.gif' border=0/></a>&#160;";
+		firstPageLabel = "";
+		previousPageLabel = "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"#\" tabindex=\"-1\" onclick=\"{0}({1}); return false;\">이전</a></li>";
+		currentPageLabel = "<li class=\"page-item active\" aria-current=\"page\"><a class=\"page-link\" href=\"#none\">{0}</a></li>";
+		otherPageLabel = "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"{0}({1}); return false;\">{2}</a></li>";
+		nextPageLabel = "<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"{0}({1}); return false;\">다음</a></li>";
+		lastPageLabel = "";
 	}
 
 	@Override
