@@ -53,6 +53,10 @@
 	    p:viewClass="org.springframework.web.servlet.view.JstlView"
 	    p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
 
+
+    <bean id="jsonView" name="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+        <property name="contentType" value="application/json;charset=UTF-8"/>
+    </bean>
     <!-- For Pagination Tag -->
     <bean id="imageRenderer" class="egovframework.beauty.cmmn.web.EgovImgPaginationRenderer"/>
 
@@ -66,4 +70,14 @@
 	<!-- /For Pagination Tag -->
 
     <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
+    
+    <mvc:interceptors>
+    	<mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/admin/login.do"/>
+            <mvc:exclude-mapping path="/admin/logout.do"/>
+            <bean class="egovframework.beauty.cmmn.interceptor.AdminInterceptor"></bean>
+		</mvc:interceptor>
+    </mvc:interceptors>
+    
 </beans>
