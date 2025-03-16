@@ -17,13 +17,13 @@
 			            <h1 class="auth-title">로그인</h1>
 			            <form id="postForm" name="postForm" method="post">
 			                <div class="form-group position-relative has-icon-left mb-4">
-			                    <input type="text" class="form-control form-control-xl" placeholder="Username">
+			                    <input type="text" name="admId" class="form-control form-control-xl" placeholder="Username">
 			                    <div class="form-control-icon">
 			                        <i class="bi bi-person"></i>
 			                    </div>
 			                </div>
 			                <div class="form-group position-relative has-icon-left mb-4">
-			                    <input type="password" class="form-control form-control-xl" placeholder="Password">
+			                    <input type="password" name="admPwd" class="form-control form-control-xl" placeholder="Password">
 			                    <div class="form-control-icon">
 			                        <i class="bi bi-shield-lock"></i>
 			                    </div>

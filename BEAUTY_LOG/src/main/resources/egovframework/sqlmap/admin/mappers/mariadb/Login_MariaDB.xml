@@ -7,11 +7,25 @@
 		<result property="stat"				column="STAT"			/>
 	</resultMap>
 	
-	<resultMap id="LoginVO" type="login" extends="default">
+	<resultMap id="loginVO" type="login" extends="default">
 		<result property="admSn"			column="ADM_SN"				/>
 		<result property="admId"			column="ADM_ID"				/>
 		<result property="admPwd"			column="ADM_PWD"			/>
 	</resultMap>
 	
+	<!-- 로그인 처리 -->
+	<select id="getLogin" resultMap="loginVO">
+		SELECT
+			ADM_SN
+			, ADM_ID
+			, ADM_PWD
+			, REG_DT
+			, UPD_DT
+			, STAT
+		FROM
+			TB_ADMIN
+		WHERE 1=1
+			AND ADM_ID = #{admId}
+	</select>
 </mapper>
 
