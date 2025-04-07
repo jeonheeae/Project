@@ -1,7 +1,21 @@
 package egovframework.beauty.front.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginVO {
     private int userSn;
     private String userId;
@@ -9,82 +23,22 @@ public class LoginVO {
     private String userName;
     private String userEmail;
     private String userPhone;
-    private int status;  // int로 변경
-    private LocalDateTime createdAt;  // LocalDateTime으로 변경
-    private LocalDateTime updatedAt;  // LocalDateTime으로 변경
+    private boolean status; // boolean 그대로 유지
+    private Timestamp createdAt; // Timestamp로 수정
+    private Timestamp updatedAt; // Timestamp로 수정
 
-    
-    // getters and setters
-    public int getUserSn() {
-        return userSn;
+    // createdAt을 LocalDateTime으로 변환하는 메서드
+    public LocalDateTime getCreatedAtAsLocalDateTime() {
+        return createdAt != null ? createdAt.toLocalDateTime() : null;
     }
 
-    public void setUserSn(int userSn) {
-        this.userSn = userSn;
+    // updatedAt을 LocalDateTime으로 변환하는 메서드
+    public LocalDateTime getUpdatedAtAsLocalDateTime() {
+        return updatedAt != null ? updatedAt.toLocalDateTime() : null;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserPwd() {
-        return userPwd;
-    }
-
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
-    public int getStatus() {
+    // boolean 타입의 status에 대해 isStatus()로 getter 메서드 사용
+    public boolean isStatus() {
         return status;
     }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-    
 }

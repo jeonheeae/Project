@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.beauty.front.service.mapper.LoginMapper">
+    <!-- 공통 필드 매핑 -->
+    <resultMap id="default" type="default">
+        <result property="createdAt" column="createdAt"/>
+        <result property="updatedAt" column="updatedAt"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <!-- LoginVO에 대한 전체 매핑 -->
+    <resultMap id="loginVO" type="egovframework.beauty.front.model.LoginVO" extends="default">
+        <result property="userSn" column="userSn"/>
+        <result property="userId" column="userId"/>
+        <result property="userPwd" column="userPwd"/>
+        <result property="userName" column="userName"/>
+        <result property="userEmail" column="userEmail"/>
+        <result property="userPhone" column="userPhone"/>
+    </resultMap>
+
+    <!-- 로그인 쿼리 -->
+    <select id="getLogin" resultMap="loginVO" parameterType="egovframework.beauty.front.model.LoginVO">
+        SELECT
+            userSn,
+            userId,
+            userPwd,
+            userName,
+            userEmail,
+            userPhone,
+            status,
+            createdAt,
+            updatedAt
+        FROM
+            TB_USER
+        WHERE
+            userId = #{userId}
+            AND userPwd = #{userPwd}
+    </select>
+</mapper>

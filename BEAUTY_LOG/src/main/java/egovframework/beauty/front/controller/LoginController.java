@@ -30,6 +30,7 @@ public class LoginController {
         return "front/login";  
     }
 
+    // 로그인 처리
     @RequestMapping(value="/login.do", method = {RequestMethod.POST})
     public String postLogin(
             ModelMap model,
@@ -69,9 +70,9 @@ public class LoginController {
                 writer.close();
                 return null;
             }
-            
-            // 상태값 체크
-            if (rs.getStatus() != 1) {
+
+            // 상태값 체크 (boolean 타입으로 비교)
+            if (!rs.isStatus()) {  // isStatus() 메서드를 사용
                 PrintWriter writer = response.getWriter(); 
                 response.setContentType("text/html; charset=UTF-8;");
                 request.setCharacterEncoding("UTF-8");
