@@ -11,17 +11,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
-	
-	
-	@RequestMapping(value="/index.do", method = {RequestMethod.GET})
-	public ModelAndView frontMain(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			HttpSession session
-			)throws Exception {
-		ModelAndView mav = new ModelAndView("front/main");
-		
-		return mav;
-	}
-	
+
+    @RequestMapping(value="/index.do", method = {RequestMethod.GET})
+    public ModelAndView frontMain(
+            HttpServletRequest request, 
+            HttpServletResponse response, 
+            HttpSession session
+    ) throws Exception {
+        ModelAndView mav = new ModelAndView("front/main");
+
+        // 세션에서 userId 확인
+        String userId = (String) session.getAttribute("userId");
+
+        if (userId != null) {
+            // 로그인된 상태일 경우 로그인한 userId를 전달
+            mav.addObject("userId", userId);
+        }
+
+        return mav;
+    }
 }
