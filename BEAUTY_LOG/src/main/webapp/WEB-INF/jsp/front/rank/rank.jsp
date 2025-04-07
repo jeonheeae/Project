@@ -141,28 +141,30 @@
                             </li>
                         </ul>
 
-                        <!-- 로그인 전 -->
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a href="<c:url value='/front/login.do' />" class="nav-link link-body-emphasis px-2">
-                                    <i class="bi bi-box-arrow-in-right me-2"></i>로그인
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<c:url value='/front/join.do' />" class="nav-link link-body-emphasis px-2">
-                                    <i class="bi bi-person-plus me-2"></i>회원가입
-                                </a>
-                            </li>
-                        </ul>
-
-                        <!-- 로그인 후 -->
-                        <ul class="nav d-none">
-                            <li class="nav-item">
-                                <a href="javascript:" class="nav-link link-body-emphasis px-2">
-                                    <i class="bi bi-box-arrow-left me-2"></i>로그아웃
-                                </a>
-                            </li>
-                        </ul>
+					<!-- 로그인 전 -->
+					<ul class="nav">   
+					    <c:if test="${empty sessionScope.userId}">
+					        <li class="nav-item">
+					            <a href="<c:url value='/front/login.do'/>" class="nav-link link-body-emphasis px-2">
+					                <i class="bi bi-box-arrow-in-right me-2"></i>로그인
+					            </a>
+					        </li>
+					        <li class="nav-item">
+					            <a href="<c:url value='/front/join.do'/>" class="nav-link link-body-emphasis px-2">
+					                <i class="bi bi-person-plus me-2"></i>회원가입
+					            </a>
+					        </li>
+					    </c:if>
+					
+					    <!-- 로그인 후 -->
+					    <c:if test="${not empty sessionScope.userId}">
+					        <li class="nav-item">
+					            <a href="<c:url value='/front/logout.do'/>" class="nav-link link-body-emphasis px-2">
+					                <i class="bi bi-box-arrow-left me-2"></i>로그아웃
+					            </a>
+					        </li>
+					    </c:if>
+						</ul>
                     </div>
                 </div>
             </nav>

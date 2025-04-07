@@ -140,38 +140,48 @@
                             </li>
                         </ul>
 
-                        <!-- 로그인 전 -->
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a href="<c:url value='/front/login.do'/>" class="nav-link link-body-emphasis px-2"><i class="bi bi-box-arrow-in-right me-2"></i>로그인</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<c:url value='/front/join.do'/>" class="nav-link link-body-emphasis px-2"><i class="bi bi-person-plus me-2"></i>회원가입</a>
-                            </li>
-                        </ul>
-                        <!-- 로그인 후 -->
-                        <ul class="nav d-none">
-                            <li class="nav-item">
-                                <a href="javascript:" class="nav-link link-body-emphasis px-2"><i class="bi bi-box-arrow-left me-2"></i>로그아웃</a>
-                            </li>
-                        </ul>
+					<!-- 로그인 전 -->
+					<ul class="nav">   
+					    <c:if test="${empty sessionScope.userId}">
+					        <li class="nav-item">
+					            <a href="<c:url value='/front/login.do'/>" class="nav-link link-body-emphasis px-2">
+					                <i class="bi bi-box-arrow-in-right me-2"></i>로그인
+					            </a>
+					        </li>
+					        <li class="nav-item">
+					            <a href="<c:url value='/front/join.do'/>" class="nav-link link-body-emphasis px-2">
+					                <i class="bi bi-person-plus me-2"></i>회원가입
+					            </a>
+					        </li>
+					    </c:if>
+					
+					    <!-- 로그인 후 -->
+					    <c:if test="${not empty sessionScope.userId}">
+					        <li class="nav-item">
+					            <a href="<c:url value='/front/logout.do'/>" class="nav-link link-body-emphasis px-2">
+					                <i class="bi bi-box-arrow-left me-2"></i>로그아웃
+					            </a>
+					        </li>
+					    </c:if>
+						</ul>
                     </div>
                 </div>
             </nav>
         </header>
         <!-- E : header -->
+        <!-- E : header -->
 
         <!-- S : 로그인 -->
         <main class="main form-signin w-100">
-            <form class="pt-5">
+            <form action="<c:url value='/front/login.do'/>" method="POST" class="pt-5">
                 <h3 class="fw-bold text-center">로그인</h3>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">아이디</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="아이디 입력">
+                    <label for="userId" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디 입력" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputPassword5" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="inputPassword5" placeholder="비밀번호 입력">
+                    <label for="userPwd" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호 입력" required>
                 </div>
                 <div class="form-check text-start my-3">
                     <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
@@ -180,7 +190,7 @@
                     </label>
                 </div>
                 <div class="btn-group w-100">
-                    <button class="btn btn-outline-primary" type="submit">회원가입</button>
+                    <button class="btn btn-outline-primary" type="button">회원가입</button>
                     <button class="btn btn-primary" type="submit">로그인</button>
                 </div>
             </form>
