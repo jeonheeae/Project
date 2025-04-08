@@ -190,7 +190,7 @@
                     </label>
                 </div>
                 <div class="btn-group w-100">
-                    <button class="btn btn-outline-primary" type="button">회원가입</button>
+                    <a href="<c:url value='/front/join.do'/>" class="btn btn-outline-primary">회원가입</a>
                     <button class="btn btn-primary" type="submit">로그인</button>
                 </div>
             </form>

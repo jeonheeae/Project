@@ -161,75 +161,95 @@
         </header>
         <!-- E : header -->
 
-        <!-- S : 회원가입 -->
-        <main class="main form-signin w-100">
-            <form class="pt-5">
-                <h3 class="fw-bold text-center">회원가입</h3>
-
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">아이디</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="아이디 입력">
-                </div>
-                <div class="mb-3">
-                    <label for="inputPassword5" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="inputPassword5" placeholder="비밀번호 입력">
-                </div>
-                <div class="mb-3">
-                    <label for="inputPassword5" class="form-label">비밀번호 확인</label>
-                    <input type="password" class="form-control" id="inputPassword5" placeholder="비밀번호 다시 입력">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">이름</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름 입력">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">전화번호</label>
-                    <div class="row g-2">
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>010</option>
-                                <option value="1">02</option>
-                                <option value="2">032</option>
-                                <option value="3">055</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <input type="num" class="form-control" id="exampleFormControlInput1" placeholder="0000">
-                        </div>
-                        <div class="col">
-                            <input type="num" class="form-control" id="exampleFormControlInput1" placeholder="0000">
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">이메일</label>
-                    <div class="row g-2 align-items-center">
-                        <div class="col-5">
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이메일 아이디">
-                        </div>
-                        <div class="col-1">
-                            <span>@</span>
-                        </div>
-                        <div class="col-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>이메일 선택</option>
-                                <option value="1">naver.com</option>
-                                <option value="2">gmail.com</option>
-                                <option value="3">daum.net</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-check text-start my-3">
-                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                    <label class="form-check-label fw-medium" for="flexCheckDefault">약관에 동의합니다.</label>
-                </div>
-                <div class="btn-group w-100">
-                    <button class="btn btn-outline-primary" type="submit">이전</button>
-                    <button class="btn btn-primary" type="submit">다음</button>
-                </div>
-            </form>
-        </main>
+			<main class="main form-signin w-100">
+		    <form action="<c:url value='/front/join.do'/>" method="post" class="pt-5">
+		        <h3 class="fw-bold text-center">회원가입</h3>
+		
+		        <!-- 오류 메시지 출력 -->
+		        <c:if test="${not empty errorMessage}">
+		            <div class="alert alert-danger">
+		                ${errorMessage}
+		            </div>
+		        </c:if>
+		
+		        <!-- 아이디 입력 -->
+		        <div class="mb-3">
+		            <label for="userId" class="form-label">아이디</label>
+		            <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디 입력" value="${not empty param.userId ? param.userId : ''}">
+		        </div>
+		
+		        <!-- 비밀번호 입력 -->
+		        <div class="mb-3">
+		            <label for="userPwd" class="form-label">비밀번호</label>
+		            <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호 입력">
+		        </div>
+		
+		        <!-- 비밀번호 확인 입력 -->
+		        <div class="mb-3">
+		            <label for="confirmPwd" class="form-label">비밀번호 확인</label>
+		            <input type="password" class="form-control" id="confirmPwd" name="confirmPwd" placeholder="비밀번호 다시 입력">
+		        </div>
+		
+		        <!-- 이름 입력 -->
+		        <div class="mb-3">
+		            <label for="userName" class="form-label">이름</label>
+		            <input type="text" class="form-control" id="userName" name="userName" placeholder="이름 입력" value="${not empty param.userName ? param.userName : ''}">
+		        </div>
+		
+		        <!-- 전화번호 입력 -->
+		        <div class="mb-3">
+		            <label for="userPhone" class="form-label">전화번호</label>
+		            <div class="row g-2">
+		                <div class="col">
+		                    <select class="form-select" name="phonePrefix" aria-label="전화번호 지역" value="${not empty param.phonePrefix ? param.phonePrefix : '010'}">
+		                        <option value="010" ${param.phonePrefix == '010' ? 'selected' : ''}>010</option>
+		                        <option value="02" ${param.phonePrefix == '02' ? 'selected' : ''}>02</option>
+		                        <option value="032" ${param.phonePrefix == '032' ? 'selected' : ''}>032</option>
+		                        <option value="055" ${param.phonePrefix == '055' ? 'selected' : ''}>055</option>
+		                    </select>
+		                </div>
+		                <div class="col">
+		                    <input type="text" class="form-control" name="phoneMiddle" placeholder="0000" value="${not empty param.phoneMiddle ? param.phoneMiddle : ''}">
+		                </div>
+		                <div class="col">
+		                    <input type="text" class="form-control" name="phoneEnd" placeholder="0000" value="${not empty param.phoneEnd ? param.phoneEnd : ''}">
+		                </div>
+		            </div>
+		        </div>
+		
+		        <!-- 이메일 입력 -->
+		        <div class="mb-3">
+		            <label for="userEmail" class="form-label">이메일</label>
+		            <div class="row g-2 align-items-center">
+		                <div class="col-5">
+		                    <input type="text" class="form-control" name="emailId" placeholder="이메일 아이디" value="${not empty param.emailId ? param.emailId : ''}">
+		                </div>
+		                <div class="col-1">
+		                    <span>@</span>
+		                </div>
+		                <div class="col-6">
+		                    <select class="form-select" name="emailDomain" aria-label="이메일 도메인" value="${not empty param.emailDomain ? param.emailDomain : ''}">
+		                        <option value="naver.com" ${param.emailDomain == 'naver.com' ? 'selected' : ''}>naver.com</option>
+		                        <option value="gmail.com" ${param.emailDomain == 'gmail.com' ? 'selected' : ''}>gmail.com</option>
+		                        <option value="daum.net" ${param.emailDomain == 'daum.net' ? 'selected' : ''}>daum.net</option>
+		                    </select>
+		                </div>
+		            </div>
+		        </div>
+		
+		        <!-- 약관 동의 -->
+		        <div class="form-check text-start my-3">
+		            <input class="form-check-input" type="checkbox" value="agree" id="flexCheckDefault" name="agree">
+		            <label class="form-check-label fw-medium" for="flexCheckDefault">약관에 동의합니다.</label>
+		        </div>
+		
+		        <!-- 버튼들 -->
+		        <div class="btn-group w-100">
+		            <button class="btn btn-outline-primary" type="button" onclick="window.location.href='<c:url value='/front/index.do'/>'">이전</button>
+		            <button class="btn btn-primary" type="submit">회원가입</button>
+		        </div>
+		    </form>
+		</main>
         <!-- E : 회원가입 -->
 
         <!-- S : footer -->

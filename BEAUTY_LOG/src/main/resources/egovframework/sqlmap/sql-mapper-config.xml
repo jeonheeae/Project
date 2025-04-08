@@ -6,6 +6,8 @@
 		<typeAlias alias="egovMap" type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
 		<typeAlias alias="default" type="egovframework.beauty.admin.model.DefaultVO"/>
 		<typeAlias alias="login" type="egovframework.beauty.admin.model.LoginVO"/>
+		<typeAlias alias="frontlogin" type="egovframework.beauty.front.model.LoginVO"/>
+		<typeAlias alias="join" type="egovframework.beauty.front.model.JoinVO"/>
 		<typeAlias alias="product" type="egovframework.beauty.admin.model.ProductVO"/>
     </typeAliases>
 </configuration>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.beauty.front.service.mapper.JoinMapper">
+    <select id="checkUserIdExistence" resultType="int">
+        SELECT COUNT(*) FROM tb_user WHERE userId = #{userId}
+    </select>
+
+    <insert id="insertUser" parameterType="egovframework.beauty.front.model.JoinVO">
+        INSERT INTO tb_user (userId, userPwd, userName, userEmail, userPhone, status)
+        VALUES (#{userId}, #{userPwd}, #{userName}, #{userEmail}, #{userPhone}, #{status})
+    </insert>
+</mapper>
+
