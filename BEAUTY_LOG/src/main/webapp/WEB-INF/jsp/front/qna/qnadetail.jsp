@@ -1,5 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -182,7 +184,7 @@
                                     <tr>
                                         <td class="px-5 py-4">
                                             <h4 class="fw-semibold">
-                                                <%= request.getAttribute("title") != null ? request.getAttribute("title") : "제목이 들어갑니다." %>
+                                                ${qnaDetail.title}
                                             </h4>
                                         </td>
                                     </tr>
@@ -191,25 +193,25 @@
                                     <tr>
                                         <td class="px-5 py-2">
                                             <span class="me-3 fw-semibold">작성자</span> 
-                                            <%= request.getAttribute("author") != null ? request.getAttribute("author") : "작성자 1" %>
+                                            ${qnaDetail.userId}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-5 py-2">
                                             <span class="me-3 fw-semibold">작성일</span> 
-                                            <%= request.getAttribute("date") != null ? request.getAttribute("date") : "yyyy-mm-dd" %>
+                                            <fmt:formatDate value="${qnaDetail.createdAt}" pattern="yyyy-MM-dd" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-5 py-2">
                                             <span class="me-3 fw-semibold">조회수</span> 
-                                            <%= request.getAttribute("views") != null ? request.getAttribute("views") : "10" %>
+                                              ${qnaDetail.viewCount}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-5 py-2">
                                             <span class="me-3 fw-semibold">첨부파일</span> 
-                                            <%= request.getAttribute("attachment") != null ? request.getAttribute("attachment") : "첨부파일명.jpg" %>
+                                            첨부파일 없음
                                             <button type="button" class="btn btn-outline-primary btn-sm ms-3">
                                                 <i class="bi bi-download"></i> 다운로드
                                             </button>
@@ -218,7 +220,7 @@
                                     <tr>
                                         <td class="px-5 py-5">
                                             <pre>
-                                                <%= request.getAttribute("content") != null ? request.getAttribute("content") : "내용이 작성되면 이 곳에 표시됩니다." %>
+                                                ${qnaDetail.content}
                                             </pre>
                                         </td>
                                     </tr>
@@ -227,37 +229,45 @@
                         </div>
                     </div>
 
-                    <!-- 댓글 -->
-                    <div class="row">
-                        <div class="table-wrap">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td class="px-5 py-4">
-                                            <label for="exampleFormControlTextarea1" class="form-label">댓글 작성</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            <button class="btn btn-primary mt-3" type="submit">작성하기</button>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="p-5">
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="name m-0 me-4 fw-semibold">홍길동</p>
-                                            </div>
-                                            <p class="review m-0">댓글이 작성되면 이 곳에 표시됩니다.</p>
-                                        </td>
-                                    </tr>
-                                    <!-- 더 많은 댓글 추가 가능 -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+<!-- 댓글 작성 form -->
+<div class="row">
+    <div class="table-wrap">
+        <form action="<c:url value='/front/writeComment.do'/>" method="post" onsubmit="return checkCommentLogin('${sessionScope.userId}')">
+            <input type="hidden" name="qnaId" value="${qnaDetail.qnaId}">
 
-                    <div class="btn-group justify-content-center w-100 mt-5">
-                        <button class="btn btn-outline-primary w-100" type="submit">목록으로</button>
-                    </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td class="px-5 py-4">
+                            <label for="exampleFormControlTextarea1" class="form-label">댓글 작성</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="3" required></textarea>
+                            <button class="btn btn-primary mt-3" type="submit">작성하기</button>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <c:forEach var="comment" items="${comments}">
+                        <tr>
+                            <td class="p-5">
+                                <div class="d-flex align-items-center mb-3">
+                                    <p class="name m-0 me-4 fw-semibold">${comment.userId}</p>
+                                </div>
+                                <p class="review m-0">${comment.content}</p>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="btn-group justify-content-center w-100 mt-5">
+   <button class="btn btn-outline-primary w-100" type="button" onclick="location.replace('<c:url value='/front/qna.do'/>')">목록으로</button>
+</div>
                 </div>
             </main>
             <!-- E : qna-detail -->
@@ -289,6 +299,8 @@
             <!-- E : footer -->
         </div>
 
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    		<script src="<c:url value='/js/front/check.js'/>"></script>
     </body>
 </html>

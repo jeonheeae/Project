@@ -1,6 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -8,7 +8,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
-
+	
+	
+  
+    
     <!-- S : 파비콘 -->
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/front/favicon/apple-touch-icon.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/front/favicon/favicon-32x32.png' />">
@@ -197,35 +200,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">n+2</th>
-                                <td><a href="<c:url value='/front/qnadetail.do' />">제목이 들어갑니다.</a></td>
-                                <td>작성자 1</td>
-                                <td>yyyy-mm-dd</td>
-                                <td>-</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">n+1</th>
-                                <td><a href="javascript:">제목이 들어갑니다. 제목이 들어갑니다. 제목이 들어갑니다.</a></td>
-                                <td>작성자 2</td>
-                                <td>yyyy-mm-dd</td>
-                                <td><i class="bi bi-archive"></i></td>
-                                <td>1,000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">n</th>
-                                <td><a href="javascript:">제목이 들어갑니다. 제목이 들어갑니다.</a></td>
-                                <td>작성자 3</td>
-                                <td>yyyy-mm-dd</td>
-                                <td>-</td>
-                                <td>100</td>
-                            </tr>
-                        </tbody>
+					    <c:forEach var="qna" items="${qnaList}" varStatus="status">
+					        <tr>
+					            <th scope="row">${status.count}</th>
+					            <td><a href="<c:url value='/front/qnadetail.do?qnaId=${qna.qnaId}' />">${qna.title}</a></td>
+					            <td>${qna.userId}</td>
+					            <td><fmt:formatDate value="${qna.createdAt}" pattern="yyyy-MM-dd" /></td>
+					            <td>-</td>
+					            <td>${qna.viewCount}</td> 
+					        </tr>
+					    </c:forEach>
+                        </tbody><!-- 끝 -->
                     </table>
                 </div>
 
-                <nav aria-label="Page navigation">
+				<!-- 글쓰기 버튼 -->
+			    <div class="d-flex justify-content-end mb-3">
+			        <a href="javascript:void(0);" onclick="checkLogin('${sessionScope.userId}')" class="btn btn-primary">
+			            <i class="bi bi-pencil-square me-1"></i> 글쓰기
+			        </a>
+			    </div>
+			    	
+					<!-- 페이징 처리 -->
+					<nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
@@ -276,7 +273,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-
+	<script src="<c:url value='/js/front/check.js'/>"></script>
 </body>
 
 </html>
