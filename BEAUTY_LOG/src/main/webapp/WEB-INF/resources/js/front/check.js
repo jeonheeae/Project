@@ -17,3 +17,17 @@ function checkCommentLogin(userId) {
     }
     return true; // form submit 허용
 }
+
+function checkAttendance() {
+    $.ajax({
+        type: "POST",
+        url: "/front/attendanceCheck.do", // ← 정확한 URL인지 확인
+        success: function(data) {
+            alert(data);  // 백엔드에서 보내준 "출석완료! 100P 지급!" 같은 메시지
+            location.reload();
+        },
+        error: function() {
+            alert("로그인이 필요합니다.");
+        }
+    });
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.beauty.front.service.mapper.EventMapper">
+
+    <!-- 오늘 출석 여부 확인 -->
+    <select id="checkTodayAttendance" parameterType="int" resultType="int">
+        SELECT COUNT(*) 
+        FROM tb_attendance
+        WHERE userSn = #{userSn}
+        AND attendanceDate = CURDATE()
+    </select>
+
+    <!-- 출석 INSERT -->
+    <insert id="insertAttendance" parameterType="int">
+        INSERT INTO tb_attendance (userSn, attendanceDate)
+        VALUES (#{userSn}, CURDATE())
+    </insert>
+
+    <!-- 총 출석일 수 -->
+    <select id="getAttendanceCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_attendance
+        WHERE userSn = #{userSn}
+    </select>
+
+    <!-- 100P 지급 -->
+    <insert id="insertCouponPoint" parameterType="int">
+        INSERT INTO tb_coupon (userSn, couponType, couponName)
+        VALUES (#{userSn}, 'POINT', '출석체크 100P')
+    </insert>
+
+    <!-- 5% 할인 쿠폰 지급 -->
+    <insert id="insertCouponDiscount" parameterType="int">
+        INSERT INTO tb_coupon (userSn, couponType, couponName, discountRate)
+        VALUES (#{userSn}, 'DISCOUNT', '출석 15일 달성 5% 할인쿠폰', 5)
+    </insert>
+
+    <!-- 1+1 이벤트 쿠폰 지급 -->
+    <insert id="insertCouponEvent" parameterType="int">
+        INSERT INTO tb_coupon (userSn, couponType, couponName)
+        VALUES (#{userSn}, 'EVENT', '출석 30일 달성 1+1 쿠폰')
+    </insert>
+    
+<select id="selectAttendedDays" resultType="int">
+        SELECT DAY(attendanceDate)
+        FROM tb_attendance
+        WHERE userSn = #{userSn}
+          AND YEAR(attendanceDate) = #{year}
+          AND MONTH(attendanceDate) = #{month}
+    </select>
+</mapper>

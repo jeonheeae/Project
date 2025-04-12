@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -51,6 +52,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/front/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/front/sub.css">
     <!-- E : CSS -->
+
 
     <style>
         .bd-placeholder-img {
@@ -171,52 +173,46 @@
         <!-- E : header -->
         <!-- E : header -->
 
-        <!-- S : 출석체크 이벤트 -->
-        <main class="main event w-100 text-center">
-            <div class="container">
-                <div class="title-wrap pt-5 pb-4">
-                    <h3 class="fw-bold">출석체크 이벤트</h3>
-                    <h4 class="fw-semibold">3월 출석체크</h4>
-                    <p class="mt-3">오늘 날짜 : yyyy-mm-dd</p>
-                </div>
-                <ul class="calendar row row-cols-1 justify-content-between">
-                    <li><a href="javascript:">1</a></li>
-                    <li><a href="javascript:">2</a></li>
-                    <li><a href="javascript:">3</a></li>
-                    <li><a href="javascript:">4</a></li>
-                    <li><a href="javascript:">5</a></li>
-                    <li><a href="javascript:">6</a></li>
-                    <li><a href="javascript:">7</a></li>
-                    <li><a href="javascript:">8</a></li>
-                    <li><a href="javascript:">9</a></li>
-                    <li><a href="javascript:">10</a></li>
-                    <li><a href="javascript:">11</a></li>
-                    <li><a href="javascript:">12</a></li>
-                    <li><a href="javascript:">13</a></li>
-                    <li><a href="javascript:">14</a></li>
-                    <li><a href="javascript:">15</a></li>
-                    <li><a href="javascript:">16</a></li>
-                    <li><a href="javascript:">17</a></li>
-                    <li><a href="javascript:">18</a></li>
-                    <li><a href="javascript:">19</a></li>
-                    <li><a href="javascript:">20</a></li>
-                    <li><a href="javascript:">21</a></li>
-                    <li><a href="javascript:">22</a></li>
-                    <li><a href="javascript:">23</a></li>
-                    <li><a href="javascript:">24</a></li>
-                    <li><a href="javascript:">25</a></li>
-                    <li><a href="javascript:">26</a></li>
-                    <li><a href="javascript:">27</a></li>
-                    <li><a href="javascript:">28</a></li>
-                    <li><a href="javascript:">29</a></li>
-                    <li><a href="javascript:">30</a></li>
-                    <li><a href="javascript:">31</a></li>
-                </ul>
-                <div class="btn-group justify-content-center w-100 mt-5">
-                    <button class="btn btn-primary w-100" type="submit">출석체크</button>
-                </div>
-            </div>
-        </main>
+    <!-- 출석체크 이벤트 -->
+<main class="main event w-100 text-center">
+  <div class="container">
+    <div class="title-wrap pt-5 pb-4">
+      <h3 class="fw-bold">출석체크 이벤트</h3>
+      <h4 class="fw-semibold">${month}월 출석체크</h4>
+      <p class="mt-3">오늘 날짜 : ${today}</p>
+      <p class="mt-2">출석 횟수 : ${attendanceCount}회</p> 
+    </div>
+
+    <ul class="calendar row row-cols-1 justify-content-between">
+      <c:forEach var="day" begin="1" end="${lastDayOfMonth}">
+        <c:set var="attended" value="false"/>
+        <!-- 출석한 날들과 비교 -->
+        <c:forEach var="attendedDay" items="${attendedDays}">
+          <c:if test="${day == attendedDay}">
+            <c:set var="attended" value="true"/>
+          </c:if>
+        </c:forEach>
+        
+        <!-- 출석 여부에 따른 스타일 적용 -->
+        <c:choose>
+          <c:when test="${attended}">
+            <li class="attended" data-day="${day}">${day}</li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="javascript:">${day}</a></li>
+          </c:otherwise>
+        </c:choose>
+      </c:forEach>
+    </ul>
+
+    <form method="post" action="<c:url value='/front/attendanceCheck.do'/>">
+      <div class="btn-group justify-content-center w-100 mt-5">
+        <button class="btn btn-primary w-100" type="submit">출석체크</button>
+      </div>
+    </form>
+  </div>
+</main>
+
         <!-- E : 출석체크 이벤트 -->
 
         <!-- S : footer -->
