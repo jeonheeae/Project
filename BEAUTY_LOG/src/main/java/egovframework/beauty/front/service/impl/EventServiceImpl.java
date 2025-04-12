@@ -28,14 +28,14 @@ public class EventServiceImpl implements EventService {
 
         String message = "출석완료! 오늘은 " + attendanceDays + "일째 출석입니다!";
 
-        if (attendanceDays == 1) {
-            eventMapper.insertCouponPoint(userSn);  // 100P 지급
-            message += " 100P 지급!";
-        } else if (attendanceDays == 15) {
-            eventMapper.insertCouponDiscount(userSn);  // 5% 쿠폰 지급
+        eventMapper.insertCouponPoint(userSn);  
+        message += " 100P 지급!";
+
+        if (attendanceDays == 15) {
+            eventMapper.insertCouponDiscount(userSn);  
             message += " 5% 할인쿠폰 지급!";
         } else if (attendanceDays == 30) {
-            eventMapper.insertCouponEvent(userSn);  // 1+1 쿠폰 지급
+            eventMapper.insertCouponEvent(userSn);  
             message += " 1+1 쿠폰 지급!";
         }
 
