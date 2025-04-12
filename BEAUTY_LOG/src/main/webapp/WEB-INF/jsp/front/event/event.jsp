@@ -179,8 +179,7 @@
     <div class="title-wrap pt-5 pb-4">
       <h3 class="fw-bold">출석체크 이벤트</h3>
       <h4 class="fw-semibold">${month}월 출석체크</h4>
-      <p class="mt-3">오늘 날짜 : ${today}</p>
-      <p class="mt-2">출석 횟수 : ${attendanceCount}회</p> 
+      <p class="mt-2">이 달의 출석 횟수 : ${attendanceCount}회</p> 
     </div>
 
     <ul class="calendar row row-cols-1 justify-content-between">
