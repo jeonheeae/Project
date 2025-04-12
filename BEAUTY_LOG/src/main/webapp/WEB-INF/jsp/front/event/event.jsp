@@ -173,7 +173,7 @@
         <!-- E : header -->
         <!-- E : header -->
 
-    <!-- 출석체크 이벤트 -->
+<!-- 출석체크 이벤트 -->
 <main class="main event w-100 text-center">
   <div class="container">
     <div class="title-wrap pt-5 pb-4">
@@ -195,7 +195,10 @@
         <!-- 출석 여부에 따른 스타일 적용 -->
         <c:choose>
           <c:when test="${attended}">
-            <li class="attended" data-day="${day}">${day}</li>
+            <!-- 출석한 날에 숫자와 하트를 겹쳐서 표시 -->
+            <li class="attended" data-day="${day}">
+              <span>${day}</span> <!-- 숫자 표시 -->
+            </li>
           </c:when>
           <c:otherwise>
             <li><a href="javascript:">${day}</a></li>
@@ -211,8 +214,8 @@
     </form>
   </div>
 </main>
+<!-- E : 출석체크 이벤트 -->
 
-        <!-- E : 출석체크 이벤트 -->
 
         <!-- S : footer -->
         <div class="container pt-5">

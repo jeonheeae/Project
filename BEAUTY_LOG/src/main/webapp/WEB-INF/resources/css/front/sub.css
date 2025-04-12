@@ -64,8 +64,8 @@
 
 /* 출석한 날 */
 .event .calendar > li.attended {
-    background-color: #E11D48;
-    color: transparent; /* 숫자는 보이지 않게 숨김 */
+    background-color:  #ffa4b8;
+    color: transparent; 
     font-weight: bold;
     font-size: 1.25rem;
     line-height: 60px;
@@ -77,31 +77,29 @@
     border: none;
 }
 
-/* 출석한 날에 하트만 표시 */
+/* 출석한 날에 빈 하트 표시 */
 .event .calendar > li.attended::after {
-    content: '🤍';  /* 하트 이모지만 추가 */
+    content: '❤️';  
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    font-size: 32px;  /* 하트 크기 */
-    color: white;  /* 하트 색상 */
-    text-align: center;
-    line-height: 60px;  /* 하트가 원 안에서 중앙에 오도록 */
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%); 
+    font-size: 50px;  
+    color: white;  
+    z-index: 1; 
+    opacity: 0.7;  
 }
 
-/* 출석하지 않은 날 */
-.event .calendar > li > a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    line-height: 60px;
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: black;
-    text-decoration: none;
+/* 출석한 날의 숫자 */
+.event .calendar > li.attended span {
+    position: relative;
+    z-index: 2; 
+    font-size: 1.25rem; 
+    color: white; 
+    line-height: 60px;  
 }
+
+
 
 .event .btn-group .btn {
     max-width: 300px;
