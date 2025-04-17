@@ -1,0 +1,87 @@
+package egovframework.beauty.front.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import egovframework.beauty.front.service.mapper.ReviewMapper;
+import egovframework.beauty.front.model.ReviewVO;
+import egovframework.beauty.front.service.ReviewService;
+
+@Service
+public class ReviewServiceImpl implements ReviewService {
+
+    @Autowired
+    private ReviewMapper reviewMapper;
+    
+    @Override
+    public List<ReviewVO> getReviewsByProduct(Long prdSn) throws Exception {
+        List<ReviewVO> reviews = reviewMapper.selectReviewsByProduct(prdSn);
+
+        // 리뷰 개수 계산
+        if (reviews != null && !reviews.isEmpty()) {
+            int reviewCount = reviews.size();  
+            for (ReviewVO review : reviews) {
+                review.setReviewCount(reviewCount); 
+            }
+        }
+
+        return reviews;  // 리뷰 목록 반환
+    }
+
+    @Override
+    public List<ReviewVO> list(ReviewVO reviewVO) throws Exception {
+        return reviewMapper.list(reviewVO);
+    }
+
+    @Override
+    public int listCnt(ReviewVO reviewVO) throws Exception {
+        return reviewMapper.listCnt(reviewVO);
+    }
+
+    @Override
+    public int add(ReviewVO reviewVO) throws Exception {
+        try {
+            return reviewMapper.add(reviewVO);
+        } catch (Exception e) {
+            // 예외 처리: 예를 들어, 로깅 및 사용자 친화적인 메시지 반환
+            throw new Exception("리뷰 등록에 실패했습니다.", e);
+        }
+    }
+
+    @Override
+    public ReviewVO get(Long reviewSn) throws Exception { 
+        try {
+            return reviewMapper.get(reviewSn);  
+        } catch (Exception e) {
+            throw new Exception("리뷰 조회에 실패했습니다.", e);
+        }
+    }
+
+    @Override
+    public int edit(ReviewVO reviewVO) throws Exception {
+        try {
+            return reviewMapper.edit(reviewVO);
+        } catch (Exception e) {
+            throw new Exception("리뷰 수정에 실패했습니다.", e);
+        }
+    }
+
+    @Override
+    public int delete(ReviewVO reviewVO) throws Exception {
+        try {
+            return reviewMapper.delete(reviewVO);
+        } catch (Exception e) {
+            throw new Exception("리뷰 삭제에 실패했습니다.", e);
+        }
+    }
+    
+    // 제품명으로 리뷰 검색
+    @Override
+    public List<ReviewVO> searchByProductName(String productName) throws Exception {
+        try {
+            return reviewMapper.searchByProductName(productName);
+        } catch (Exception e) {
+            throw new Exception("제품명으로 리뷰 검색에 실패했습니다.", e);
+        }
+    }
+}

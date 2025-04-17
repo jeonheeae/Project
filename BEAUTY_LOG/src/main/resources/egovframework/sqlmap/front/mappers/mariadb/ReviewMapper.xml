@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.beauty.front.service.mapper.ReviewMapper">
+
+<select id="list" parameterType="egovframework.beauty.front.model.ReviewVO" resultType="egovframework.beauty.front.model.ReviewVO">
+    SELECT 
+        r.prdSn,
+        r.prdNm,
+        r.prdDesc,
+        ROUND(AVG(r.rating), 1) AS rating,
+        COUNT(*) AS reviewCount
+    FROM tb_review r
+    GROUP BY r.prdSn, r.prdNm, r.prdDesc
+    ORDER BY MAX(r.regDate) DESC
+    LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+</select>
+
+
+    <!-- 리뷰 목록 개수 -->
+    <select id="listCnt" parameterType="int" resultType="int">
+        SELECT COUNT(*) 
+        FROM tb_review
+    </select>
+
+    <!-- 리뷰 수 업데이트 -->
+    <update id="updateReviewCount" parameterType="long">
+        UPDATE tb_product
+        SET reviewCount = (
+            SELECT COUNT(*) 
+            FROM tb_review 
+            WHERE prdSn = #{prdSn}
+        )
+        WHERE PRD_SN = #{prdSn}
+    </update>
+
+    <!-- 리뷰 추가 -->
+    <insert id="add" parameterType="map">
+        INSERT INTO tb_review (
+            prdSn, prdNm, prdDesc, rating, writer, content, userSn
+        ) VALUES (
+            #{prdSn}, #{prdNm}, #{prdDesc}, #{rating}, #{writer}, #{content}, #{userSn}
+        )
+    </insert>
+
+
+<select id="selectReviewsByProduct" parameterType="Long" resultType="egovframework.beauty.front.model.ReviewVO">
+    SELECT 
+        r.reviewSn,
+        r.prdSn,
+        r.prdNm,
+        r.prdDesc,
+        ROUND(r.rating, 1) AS rating,  <!-- 각 리뷰의 별점은 개별적으로 반올림 -->
+        r.writer,
+        r.content,
+        r.regDate,
+        u.userName AS writerName,
+        u.userId AS writerId
+    FROM tb_review r
+    LEFT JOIN tb_user u ON r.userSn = u.userSn
+    WHERE r.prdSn = #{prdSn}
+    ORDER BY r.regDate DESC
+</select>
+
+<!-- 전체 평균 별점 계산 -->
+<select id="getAverageRating" parameterType="Long" resultType="Double">
+    SELECT ROUND(AVG(rating), 1) AS averageRating
+    FROM tb_review
+    WHERE prdSn = #{prdSn}
+</select>
+
+
+    <!-- 리뷰 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM tb_review
+        WHERE reviewSn = #{reviewSn}
+    </delete>
+
+    <!-- 제품명으로 리뷰 검색 -->
+    <select id="searchByProductName" parameterType="string" resultType="egovframework.beauty.front.model.ReviewVO">
+        SELECT 
+            r.reviewSn,
+            r.prdSn,
+            r.prdNm,  
+            r.prdDesc,
+            r.rating,
+            r.writer,
+            r.content,
+            r.regDate,
+            u.userName AS writerName,
+            u.userId AS writerId,
+            IFNULL(cnt.review_count, 0) AS reviewCount
+        FROM tb_review r
+        LEFT JOIN tb_user u ON r.userSn = u.userSn
+        LEFT JOIN (
+            SELECT prdSn, COUNT(*) AS review_count
+            FROM tb_review
+            GROUP BY prdSn
+        ) cnt ON r.prdSn = cnt.prdSn
+        WHERE r.prdNm LIKE CONCAT('%', #{prdNm}, '%')  
+        ORDER BY r.reviewSn DESC
+    </select>
+
+</mapper>
+

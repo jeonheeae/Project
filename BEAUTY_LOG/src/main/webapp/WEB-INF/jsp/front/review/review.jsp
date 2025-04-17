@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -170,48 +171,58 @@
         <!-- E : header -->
         <!-- E : header -->
 
-        <!-- S : Review -->
-        <main class="main w-100">
-            <div class="container pt-5">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="fw-bold">Review</h3>
-                    </div>
-                    <div class="col-3">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="제품명을 검색해주세요." aria-label="" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row row-cols-1 row-cols-md-4 g-3">
-                    <div class="col">
-                        <div class="card h-100 text-center">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#868e96"/>
-                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                            </svg>
-                            <div class="card-body">
-                                <h5 class="card-title fw-semibold">제품 A</h5>
-                                <p class="card-text">제품 설명이 들어갑니다. 제품 설명이 들어갑니다. </p>
-                                <p class="mb-4 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-star-fill me-2"></i>
-                                    <span class="grade me-1">4.7</span>
-                                    <span class="review-num">(16,114)</span>
-                                </p>
-                                <a href="<c:url value='/front/reviewdetail.do'/>" class="btn btn-primary">상세보기</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Other product cards can go here, following the same structure -->
-                </div>
+<!-- S : Review -->
+<main class="main w-100">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col">
+                <h3 class="fw-bold">Review</h3>
             </div>
-        </main>
-        <!-- E : Review -->
+            <div class="col-3">
+                <!-- 검색 폼 추가 -->
+                <form action="<c:url value='/front/review.do'/>" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="productName" placeholder="제품명을 검색해주세요." aria-label="" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-4 g-3">
+       <!-- 리뷰 목록을 출력하는 부분 -->
+<c:forEach var="review" items="${reviews}">
+    <div class="col">
+        <div class="card h-100 text-center">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#868e96"/>
+                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+            </svg>
+            <div class="card-body">
+                <h5 class="card-title fw-semibold">${review.prdNm}</h5> <!-- 제품 이름 -->
+                <p class="card-text">${review.prdDesc}</p> <!-- 제품 설명 -->
+                <p class="mb-4 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-star-fill me-2"></i>
+                    <span class="grade me-1">${review.rating}</span>
+                    <span class="review-num">(${review.reviewCount})</span>
+                </p>
+                <form action="<c:url value='/front/review/detail.do' />" method="get">
+                    <input type="hidden" name="prdSn" value="${review.prdSn}" />
+                    <button type="submit" class="btn btn-primary">
+                        상세보기
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</c:forEach>
+        </div>
+    </div>
+</main>
+<!-- E : Review -->
 
         <!-- S : footer -->
         <div class="container">

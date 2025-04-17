@@ -21,9 +21,9 @@ function checkCommentLogin(userId) {
 function checkAttendance() {
     $.ajax({
         type: "POST",
-        url: "/front/attendanceCheck.do", // ← 정확한 URL인지 확인
+        url: "/front/attendanceCheck.do", 
         success: function(data) {
-            alert(data);  // 백엔드에서 보내준 "출석완료! 100P 지급!" 같은 메시지
+            alert(data);  
             location.reload();
         },
         error: function() {

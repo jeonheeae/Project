@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
+	<script src="${pageContext.request.contextPath}/js/front/script.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
@@ -170,105 +172,78 @@
             </nav>
         </header>
         <!-- E : header -->
-        <!-- E : header -->
 
-        <!-- S : review-detail -->
-        <main class="main review-detail w-100">
-            <div class="container pt-5">
-                <h3 class="fw-bold">Review 상세보기</h3>
-                <!-- S : 제품 -->
-                <div class="row mb-5">
-                    <div class="col">
-                        <div class="card">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"
-                                        role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice"
-                                        focusable="false">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#868e96" />
-                                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
-                                    </svg>
-                                </div>
-                                <div class="col-md-7 d-flex align-items-center">
-                                    <div class="card-body">
-                                        <h5 class="card-title fw-semibold">제품 A</h5>
-                                        <p class="card-text">제품 설명이 들어갑니다. 제품 설명이 들어갑니다.</p>
-                                        <p class="d-flex align-items-center"><i class="bi bi-star-fill me-2"></i><span
-                                                class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                                    </div>
-                                </div>
+<!-- S : review-detail -->
+<main class="main review-detail w-100">
+    <div class="container pt-5">
+        <h3 class="fw-bold">Review 상세보기</h3>
+
+        <!-- S : 제품 -->
+        <div class="row mb-5">
+            <div class="col">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <!-- 제품 이미지 Placeholder -->  
+                            <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"
+                                role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice"
+                                focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#868e96" />
+                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
+                            </svg>
+                        </div>
+                        <div class="col-md-7 d-flex align-items-center">
+                            <div class="card-body">
+                                <h5 class="card-title fw-semibold">${productName}</h5> <!-- 제품 이름 -->
+                                <p class="card-text">${productDescription}</p> <!-- 제품 설명 -->
+                                <p class="d-flex align-items-center">
+                                    <i class="bi bi-star-fill me-2"></i>
+                                    <span class="grade me-1">${rating}</span> <!-- 평점 -->
+                                    <span class="review-num">(${reviewCount})</span> <!-- 리뷰 개수 --> <!-- 리뷰 개수 -->
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- E : 제품 -->
-
-                <!-- S : 리뷰 -->
-                <div class="row">
-                    <div class="table-wrap">
-                        <table class="table border-top">
-                            <thead>
-                                <tr>
-                                    <td class="px-5 py-3">
-                                        <h4 class="fw-semibold">리뷰</h4>
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="p-5">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <p class="name m-0 me-4 fw-semibold">홍길동</p>
-                                            <div class="star d-flex align-items-center">
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-half me-1"></i> (4.9점)
-                                            </div>
-                                        </div>
-                                        <p class="review m-0">리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다.</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-5 py-5">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <p class="name m-0 me-4 fw-semibold">홍길동</p>
-                                            <div class="star d-flex align-items-center">
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-half me-1"></i> (4.9점)
-                                            </div>
-                                        </div>
-                                        <p class="review m-0">리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다.</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-5 py-5">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <p class="name m-0 me-4 fw-semibold">홍길동</p>
-                                            <div class="star d-flex align-items-center">
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-fill me-1"></i>
-                                                <i class="bi bi-star-half me-1"></i> (4.9점)
-                                            </div>
-                                        </div>
-                                        <p class="review m-0">리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다. 리뷰가 작성되면 이 곳에 표시됩니다.</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- E : 리뷰 -->
             </div>
-        </main>
-        <!-- E : review-detail -->
+        </div>
+        <!-- E : 제품 -->
+
+        <!-- S : 리뷰 목록 -->
+		<div class="row">
+		    <div class="table-wrap">
+		        <table class="table border-top">
+		            <thead>
+		                <tr>
+		                    <td class="px-5 py-3">
+		                        <h4 class="fw-semibold">리뷰</h4>
+		                    </td>
+		                </tr>
+		            </thead>
+		            <tbody>
+		               <!-- 상품에 대한 리뷰 표시 -->
+						<c:forEach var="review" items="${reviews}">
+						    <tr class="review-item" data-review-id="${review.reviewSn}" data-rating="${review.rating}">
+						        <td class="p-5">
+						            <div class="d-flex align-items-center mb-3">
+						                <p class="name m-0 me-4 fw-semibold">${review.writer}</p> <!-- 리뷰 작성자 -->
+						                <div class="star d-flex align-items-center" id="star-container-${review.reviewSn}">
+						                    <!-- 별점: 자바스크립트로 표시할 공간 -->
+						                </div>
+						            </div>
+						            <p class="review m-0">${review.content}</p> <!-- 리뷰 내용 -->
+						        </td>
+						    </tr>
+						</c:forEach>
+		            </tbody>
+		        </table>
+		    </div>
+		</div>
+		<!-- E : 리뷰 목록 -->
+    </div>
+</main>
+<!-- E : review-detail -->
 
         <!-- S : footer -->
         <div class="container">
