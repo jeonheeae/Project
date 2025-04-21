@@ -16,10 +16,17 @@
             q.createdAt,
             q.updatedAt,
             q.status
-        FROM qna q
+        FROM tb_qna q
         JOIN tb_user u ON q.userSn = u.userSn
         ORDER BY q.createdAt DESC
     </select>
+
+    <!-- 조회수 증가 -->
+    <update id="updateQnaViewCount" parameterType="int">
+        UPDATE tb_qna
+        SET viewcount = viewcount + 1
+        WHERE qnaId = #{qnaId}
+    </update>
 
     <!-- QnA 상세 -->
     <select id="get" parameterType="egovframework.beauty.front.model.QnaVO"
@@ -33,61 +40,61 @@
             q.createdAt,
             q.updatedAt,
             q.status
-        FROM qna q
+        FROM tb_qna q
         JOIN tb_user u ON q.userSn = u.userSn
         WHERE q.qnaId = #{qnaId}
     </select>
 
     <!-- QnA 등록 -->
     <insert id="add" parameterType="egovframework.beauty.front.model.QnaVO">
-        INSERT INTO qna (title, content, userSn, createdAt, updatedAt, status)
+        INSERT INTO tb_qna (title, content, userSn, createdAt, updatedAt, status)
         VALUES (#{title}, #{content}, #{userSn}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE)
     </insert>
 
     <!-- QnA 수정 -->
     <update id="edit" parameterType="egovframework.beauty.front.model.QnaVO">
-        UPDATE qna
+        UPDATE tb_qna
         SET title = #{title}, content = #{content}, updatedAt = CURRENT_TIMESTAMP
         WHERE qnaId = #{qnaId}
     </update>
 
     <!-- QnA 삭제 -->
     <delete id="delete" parameterType="int">
-        DELETE FROM qna WHERE qnaId = #{qnaId}
+        DELETE FROM tb_qna WHERE qnaId = #{qnaId}
     </delete>
 
     <!-- 댓글 리스트 -->
-<select id="listCommentsByQnaId" resultType="egovframework.beauty.front.model.CommentVO">
-    SELECT 
-        c.commentId,
-        c.qnaId,
-        c.userSn,
-        u.userId,           
-        c.content,
-        c.createdAt,
-        c.updatedAt
-    FROM comment c
-    JOIN tb_user u ON c.userSn = u.userSn
-    WHERE c.qnaId = #{qnaId}
-    ORDER BY c.createdAt ASC
-</select>
+    <select id="listCommentsByQnaId" resultType="egovframework.beauty.front.model.CommentVO">
+        SELECT 
+            c.commentId,
+            c.qnaId,
+            c.userSn,
+            u.userId,           
+            c.content,
+            c.createdAt,
+            c.updatedAt
+        FROM tb_comment c
+        JOIN tb_user u ON c.userSn = u.userSn
+        WHERE c.qnaId = #{qnaId}
+        ORDER BY c.createdAt ASC
+    </select>
 
     <!-- 댓글 등록 -->
     <insert id="addComment" parameterType="egovframework.beauty.front.model.CommentVO">
-        INSERT INTO comment (qnaId, userSn, content, createdAt, updatedAt)
+        INSERT INTO tb_comment (qnaId, userSn, content, createdAt, updatedAt)
         VALUES (#{qnaId}, #{userSn}, #{content}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     </insert>
 
     <!-- 댓글 수정 -->
     <update id="editComment" parameterType="egovframework.beauty.front.model.CommentVO">
-        UPDATE comment
+        UPDATE tb_comment
         SET content = #{content}, updatedAt = CURRENT_TIMESTAMP
         WHERE commentId = #{commentId}
     </update>
 
     <!-- 댓글 삭제 -->
     <delete id="deleteComment" parameterType="int">
-        DELETE FROM comment WHERE commentId = #{commentId}
+        DELETE FROM tb_comment WHERE commentId = #{commentId}
     </delete>
 
 </mapper>
