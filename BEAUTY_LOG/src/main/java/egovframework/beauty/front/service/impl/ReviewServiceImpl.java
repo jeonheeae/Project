@@ -9,10 +9,16 @@ import egovframework.beauty.front.service.ReviewService;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-
+	
     @Autowired
     private ReviewMapper reviewMapper;
     
+    @Override
+    public String getProductDescriptionBySn(Long prdSn) {
+        // ReviewMapper에서 상품 설명을 조회
+        return reviewMapper.selectProductDescriptionBySn(prdSn);
+    }
+
     @Override
     public List<ReviewVO> getReviewsByProduct(Long prdSn) throws Exception {
         List<ReviewVO> reviews = reviewMapper.selectReviewsByProduct(prdSn);
@@ -74,6 +80,11 @@ public class ReviewServiceImpl implements ReviewService {
             throw new Exception("리뷰 삭제에 실패했습니다.", e);
         }
     }
+    @Override
+    public String getProductNameBySn(Long prdSn) {
+        return reviewMapper.selectProductNameBySn(prdSn);
+    }
+    
     
     // 제품명으로 리뷰 검색
     @Override

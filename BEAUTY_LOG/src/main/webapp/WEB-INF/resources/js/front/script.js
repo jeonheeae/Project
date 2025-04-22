@@ -1,4 +1,4 @@
-// 별점 표시 함수 (반올림 없이)
+// 별점 표시 함수 
 function displayStars(reviewId, rating) {
     let stars = '';
     

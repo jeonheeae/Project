@@ -15,7 +15,7 @@ public interface ReviewMapper {
 
     // 리뷰 등록
     int add(ReviewVO reviewVO) throws Exception;
-
+    
     // 리뷰 상세 조회
     ReviewVO get(Long reviewSn) throws Exception;
 
@@ -30,5 +30,9 @@ public interface ReviewMapper {
 
     // 제품 번호로 리뷰 조회
     List<ReviewVO> selectReviewsByProduct(Long prdSn);  // 여기서 파라미터 타입을 Long으로 수정
+
+    String selectProductNameBySn(Long prdSn);  
+    String selectProductDescriptionBySn (Long prdSn); 
+    
     
 }

@@ -4,27 +4,28 @@
 
 <mapper namespace="egovframework.beauty.front.service.mapper.ReviewMapper">
 
-<select id="list" parameterType="egovframework.beauty.front.model.ReviewVO" resultType="egovframework.beauty.front.model.ReviewVO">
-    SELECT 
-        r.prdSn,
-        r.prdNm,
-        r.prdDesc,
-        ROUND(AVG(r.rating), 1) AS rating,
-        COUNT(*) AS reviewCount
-    FROM tb_review r
-    GROUP BY r.prdSn, r.prdNm, r.prdDesc
-    ORDER BY MAX(r.regDate) DESC
-    LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
-</select>
-
-
-    <!-- 리뷰 목록 개수 -->
-    <select id="listCnt" parameterType="int" resultType="int">
-        SELECT COUNT(*) 
-        FROM tb_review
+    <!-- 리뷰 목록 조회 (페이징 처리) -->
+    <select id="list" parameterType="egovframework.beauty.front.model.ReviewVO" resultType="egovframework.beauty.front.model.ReviewVO">
+        SELECT 
+            r.prdSn,
+            r.prdNm,
+            r.prdDesc,
+            ROUND(AVG(r.rating), 1) AS rating,  
+            COUNT(*) AS reviewCount
+        FROM tb_review r
+        GROUP BY r.prdSn, r.prdNm, r.prdDesc
+        ORDER BY MAX(r.regDate) DESC
+        LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
     </select>
 
-    <!-- 리뷰 수 업데이트 -->
+    <!-- 리뷰 목록 개수 (특정 제품에 대한 리뷰 개수) -->
+    <select id="listCnt" parameterType="long" resultType="int">
+        SELECT COUNT(*) 
+        FROM tb_review
+        WHERE prdSn = #{prdSn}
+    </select>
+
+    <!-- 리뷰 수 업데이트 (제품의 리뷰 개수 업데이트) -->
     <update id="updateReviewCount" parameterType="long">
         UPDATE tb_product
         SET reviewCount = (
@@ -35,44 +36,54 @@
         WHERE PRD_SN = #{prdSn}
     </update>
 
-    <!-- 리뷰 추가 -->
-    <insert id="add" parameterType="map">
+    
+<!-- 상품명-->
+<select id="selectProductNameBySn" parameterType="long" resultType="string">
+    SELECT prd_nm FROM tb_product WHERE prd_sn = #{prdSn}
+</select>
+  
+<!-- 상품설명 -->
+<select id="selectProductDescriptionBySn" parameterType="long" resultType="string">
+    SELECT prd_desc FROM tb_product WHERE prd_sn = #{prdSn}
+</select>
+    
+<!-- 리뷰 추가 -->
+    <insert id="add" parameterType="egovframework.beauty.front.model.ReviewVO">
         INSERT INTO tb_review (
             prdSn, prdNm, prdDesc, rating, writer, content, userSn
         ) VALUES (
             #{prdSn}, #{prdNm}, #{prdDesc}, #{rating}, #{writer}, #{content}, #{userSn}
         )
     </insert>
+ 
+   <!-- 제품 번호로 리뷰 조회 -->
+    <select id="selectReviewsByProduct" parameterType="long" resultType="egovframework.beauty.front.model.ReviewVO">
+        SELECT 
+            r.reviewSn,
+            r.prdSn,
+            r.prdNm,
+            r.prdDesc,
+            ROUND(r.rating, 1) AS rating,
+            r.writer,
+            r.content,
+            r.regDate,
+            u.userName AS writerName,
+            u.userId AS writerId
+        FROM tb_review r
+        LEFT JOIN tb_user u ON r.userSn = u.userSn
+        WHERE r.prdSn = #{prdSn}
+        ORDER BY r.regDate DESC
+    </select>
 
-
-<select id="selectReviewsByProduct" parameterType="Long" resultType="egovframework.beauty.front.model.ReviewVO">
-    SELECT 
-        r.reviewSn,
-        r.prdSn,
-        r.prdNm,
-        r.prdDesc,
-        ROUND(r.rating, 1) AS rating,  <!-- 각 리뷰의 별점은 개별적으로 반올림 -->
-        r.writer,
-        r.content,
-        r.regDate,
-        u.userName AS writerName,
-        u.userId AS writerId
-    FROM tb_review r
-    LEFT JOIN tb_user u ON r.userSn = u.userSn
-    WHERE r.prdSn = #{prdSn}
-    ORDER BY r.regDate DESC
-</select>
-
-<!-- 전체 평균 별점 계산 -->
-<select id="getAverageRating" parameterType="Long" resultType="Double">
-    SELECT ROUND(AVG(rating), 1) AS averageRating
-    FROM tb_review
-    WHERE prdSn = #{prdSn}
-</select>
-
+    <!-- 전체 평균 별점 계산 -->
+    <select id="getAverageRating" parameterType="long" resultType="double">
+        SELECT ROUND(AVG(rating), 1) AS averageRating
+        FROM tb_review
+        WHERE prdSn = #{prdSn}
+    </select>
 
     <!-- 리뷰 삭제 -->
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="long">
         DELETE FROM tb_review
         WHERE reviewSn = #{reviewSn}
     </delete>
@@ -102,5 +113,13 @@
         ORDER BY r.reviewSn DESC
     </select>
 
-</mapper>
+<!-- 제품 수정 -->
+<update id="updateProduct" parameterType="egovframework.beauty.front.model.ReviewVO">
+    UPDATE tb_product
+    SET 
+        prd_nm = #{prdNm},
+        prd_desc = #{prdDesc}
+    WHERE prd_sn = #{prdSn}
+</update>
 
+</mapper>

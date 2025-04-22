@@ -15,9 +15,14 @@ public interface ReviewService {
 
     // 리뷰 등록
     int add(ReviewVO reviewVO) throws Exception;
-
+    
     // 리뷰 상세 조회
-    ReviewVO get(Long reviewSn) throws Exception;  // 파라미터 타입을 Long으로 수정
+    ReviewVO get(Long reviewSn) throws Exception;  
+    
+    String getProductNameBySn(Long prdSn);
+
+    // 상품 설명 조회
+    String getProductDescriptionBySn(Long prdSn); 
 
     // 리뷰 수정
     int edit(ReviewVO reviewVO) throws Exception;
@@ -30,4 +35,6 @@ public interface ReviewService {
 
     // 제품별 리뷰 목록 조회
     List<ReviewVO> getReviewsByProduct(Long prdSn) throws Exception;
+    
+    
 }

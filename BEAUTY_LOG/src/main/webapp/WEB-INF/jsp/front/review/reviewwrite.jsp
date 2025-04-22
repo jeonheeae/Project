@@ -1,6 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String today = sdf.format(new Date());
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -40,7 +47,7 @@
     <meta property="og:description" content="뷰티랭킹 관련 포트폴리오입니다.">
     <!-- E : OG 오픈그래프 (카카오톡 미리보기) -->
 
-    <title>Beauty Log</title>
+    <title>Beauty Log - 리뷰작성 </title>
     <!-- E : Beauty Log 설명 -->
 
     <!-- S : bootstrap -->
@@ -171,109 +178,73 @@
             </nav>
         </header>
         <!-- E : header -->
-
-<main class="main review-detail w-100">
+ 
+<main class="main review-detail w-100">        
     <div class="container pt-5">
-        <h3 class="fw-bold">Review 상세보기</h3>
+        <h3 class="fw-bold mb-4">리뷰 작성</h3>
 
-        <!-- S : 제품 -->
-        <div class="row mb-5">
-            <div class="col">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <!-- 제품 이미지 Placeholder -->  
-                            <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#868e96" />
-                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
-                            </svg>
-                        </div>
-                        <div class="col-md-7 d-flex align-items-center">
-                            <div class="card-body">
-                                <h5 class="card-title fw-semibold">${productName}</h5> <!-- 제품 이름 -->
-                                <p class="card-text">${productDescription}</p> <!-- 제품 설명 -->
-                                <p class="d-flex align-items-center">
-                                    <i class="bi bi-star-fill me-2"></i>
-                                    <span class="grade me-1">${rating}</span> <!-- 평점 -->
-                                    <span class="review-num">(${reviewCount})</span> <!-- 리뷰 개수 -->
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <form action="<c:url value='/front/review/post.do'/>" method="post">
+            <input type="hidden" name="prdSn" value="${prdSn}" />
+
+            <table class="table border-top">
+                <tbody>
+                    <!-- 상품명 입력 -->
+                    <tr>
+                        <th style="width: 20%;">상품명</th>
+                        <td>
+                            <strong>${prdNm}</strong>
+                            <input type="hidden" name="prdNm" value="${prdNm}" />
+                        </td>
+                    </tr>
+                    <!-- 상품설명 입력 -->
+                    <tr>
+                        <th>상품설명</th>
+                        <td>
+                            <p>${prdDesc}</p>
+                            <input type="hidden" name="prdDesc" value="${prdDesc}" />
+                        </td>
+                    </tr>
+                    <!-- 작성자 정보 -->
+                    <tr>
+                        <th style="width: 20%;">작성자</th>
+                        <td>
+                            ${sessionScope.userName}
+                            <input type="hidden" name="userId" value="${sessionScope.userId}" />
+                        </td>
+                    </tr>
+                    <!-- 별점 선택 -->
+                    <tr>
+                        <th>별점</th>
+                        <td>
+                            <select name="rating" class="form-select" required>
+                                <option value="">선택하세요</option>
+                                <option value="1">★☆☆☆☆</option>
+                                <option value="2">★★☆☆☆</option>
+                                <option value="3">★★★☆☆</option>
+                                <option value="4">★★★★☆</option>
+                                <option value="5">★★★★★</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- 리뷰 내용 입력 -->
+                    <tr>
+                        <th>내용</th>
+                        <td>
+                            <textarea name="content" rows="6" class="form-control" placeholder="리뷰 내용을 입력해주세요" required></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">등록</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="history.back()">취소</button>
             </div>
-        </div>
-        <!-- E : 제품 -->
-
-        <!-- S : 리뷰 작성 버튼 (로그인한 사용자) -->
-        <c:if test="${not empty userSn}">
-            <div class="text-end mb-3">
-                <a href="<c:url value='/front/review/write.do?prdSn=${reviews[0].prdSn}' />" class="btn btn-outline-primary">
-                    <i class="bi bi-pencil-square me-1"></i>리뷰 작성
-                </a>
-            </div>
-        </c:if>
-
-		<!-- 로그인하지 않은 사용자 -->
-		<c:if test="${empty userSn}">
-		    <div class="text-end mb-3">
-		        <!-- 로그인 알림을 띄운 후 로그인 페이지로 이동 -->
-		        <a href="javascript:void(0);" class="btn btn-outline-primary" onclick="showLoginPrompt()">
-		            <i class="bi bi-pencil-square me-1"></i>리뷰 작성
-		        </a>
-		    </div>
-		</c:if>
-
-        <!-- 리뷰 목록 -->
-        <div class="row">
-            <div class="table-wrap">
-                <table class="table border-top">
-                    <thead>
-                        <tr>
-                            <td class="px-5 py-3">
-                                <h4 class="fw-semibold">리뷰</h4>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="review" items="${reviews}">
-                            <tr class="review-item" data-review-id="${review.reviewSn}" data-rating="${review.rating}">
-                                <td class="p-5">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <p class="name m-0 me-4 fw-semibold">${review.writer}</p> <!-- 리뷰 작성자 -->
-                                        <div class="star d-flex align-items-center" id="star-container-${review.reviewSn}">
-                                            <c:forEach var="i" begin="1" end="${review.rating}">
-                                                <i class="bi bi-star-fill me-1"></i> <!-- 별 아이콘 -->
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                    <p class="review m-0">${review.content}</p> <!-- 리뷰 내용 -->
-
-                                    <!-- 작성자 본인에게만 보이는 수정/삭제 -->
-                                    <c:if test="${sessionScope.userSn == review.userSn}">
-                                        <div class="mt-3 text-end">
-                                            <a href="<c:url value='/front/review/edit.do?reviewSn=${review.reviewSn}'/>" class="btn btn-sm btn-outline-secondary me-2">수정</a>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteReview(${review.reviewSn}, ${review.prdSn})">삭제</button>
-                                        </div>
-                                    </c:if>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- E : 리뷰 목록 -->
+        </form>
     </div>
 </main>
 
-<!-- E : review-detail -->
-
-
-        <!-- S : footer -->
+    <!-- S : footer -->
         <div class="container">
             <footer class="pt-5">
                 <ul class="d-flex justify-content-center opacity-75">
@@ -302,8 +273,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-      <script src="<c:url value='/js/front/check.js?ver=2'/>"></script>
-	
+    <script src="${pageContext.request.contextPath}/js/front/check.js"></script>
+
 </body>
 
 </html>
