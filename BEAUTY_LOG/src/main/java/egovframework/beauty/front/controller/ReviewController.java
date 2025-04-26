@@ -143,6 +143,11 @@ public class ReviewController {
                 ? reviewService.searchByProductName(productName)
                 : reviewService.list(reviewVO);
 
+        for (ReviewVO review : list) {
+            List<String> images = reviewService.getProductImagesForReview(review.getPrdSn());
+            review.setProductImages(images);
+        }
+        
         mav.addObject("reviews", list);
         mav.addObject("productName", productName);
 
@@ -160,10 +165,12 @@ public class ReviewController {
                 ReviewVO productInfo = reviews.get(0);
                 mav.addObject("productName", productInfo.getPrdNm());
                 mav.addObject("productDescription", productInfo.getPrdDesc());
-                mav.addObject("rating", productInfo.getRating());
+                double averageRating = reviewService.getAverageRating(prdSn);
+                mav.addObject("rating", averageRating);
                 mav.addObject("reviewCount", productInfo.getReviewCount());
             }
-
+            List<String> productImages = reviewService.getProductImagesForReview(prdSn);
+            mav.addObject("productImages", productImages);
             mav.addObject("reviews", reviews);
         } catch (Exception e) {
             mav.setViewName("error");

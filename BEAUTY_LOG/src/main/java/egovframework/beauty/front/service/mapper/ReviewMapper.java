@@ -37,5 +37,7 @@ public interface ReviewMapper {
     String selectProductDescriptionBySn(Long prdSn); 
 
     // 제품 이미지 목록 조회
-    List<String> getProductImagesByPrdSn(Long prdSn); 
+    List<String> getProductImagesByPrdSn(Long prdSn);
+
+	double getAverageRating(Long prdSn); 
 }

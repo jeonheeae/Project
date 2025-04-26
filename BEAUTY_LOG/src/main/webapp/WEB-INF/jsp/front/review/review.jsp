@@ -180,7 +180,7 @@
             </div>
             <div class="col-3">
                 <!-- 검색 폼 추가 -->
-                <form action="<c:url value='/front/review.do'/>" method="get">
+                <form action="<c:url value='/front/review/list.do'/>" method="get">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="productName" placeholder="제품명을 검색해주세요." aria-label="" aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
@@ -192,33 +192,48 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-4 g-3">
-       <!-- 리뷰 목록을 출력하는 부분 -->
-<c:forEach var="review" items="${reviews}">
-    <div class="col">
-        <div class="card h-100 text-center">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"/>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-            </svg>
-            <div class="card-body">
-                <h5 class="card-title fw-semibold">${review.prdNm}</h5> <!-- 제품 이름 -->
-                <p class="card-text">${review.prdDesc}</p> <!-- 제품 설명 -->
-                <p class="mb-4 d-flex align-items-center justify-content-center">
-                    <i class="bi bi-star-fill me-2"></i>
-                    <span class="grade me-1">${review.rating}</span>
-                    <span class="review-num">(${review.reviewCount})</span>
-                </p>
-                <form action="<c:url value='/front/review/detail.do' />" method="get">
-                    <input type="hidden" name="prdSn" value="${review.prdSn}" />
-                    <button type="submit" class="btn btn-primary">
-                        상세보기
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</c:forEach>
+            <!-- 리뷰 목록을 출력하는 부분 -->
+            <c:forEach var="review" items="${reviews}">
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <!-- 이미지 출력 수정 -->
+                        <c:choose>
+                            <c:when test="${not empty review.productImages}">
+                                <c:forEach var="img" items="${review.productImages}" varStatus="loop">
+                                    <c:if test="${loop.index == 0}">
+                                        <!-- 첫 번째 이미지 만 출력 -->
+                                        <img src="<c:url value='/images/front/product/${img}' />" class="card-img-top" style="height:180px; object-fit:cover;" alt="제품 이미지" />
+                                    </c:if>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- 기본 Placeholder -->
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#868e96"/>
+                                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                                </svg>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold">${review.prdNm}</h5>
+                            <p class="card-text">${review.prdDesc}</p>
+                            <p class="mb-4 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-star-fill me-2"></i>
+                                <span class="grade me-1">${review.rating}</span>
+                                <span class="review-num">(${review.reviewCount})</span>
+                            </p>
+                            <form action="<c:url value='/front/review/detail.do' />" method="get">
+                                <input type="hidden" name="prdSn" value="${review.prdSn}" />
+                                <button type="submit" class="btn btn-primary">
+                                    상세보기
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </main>

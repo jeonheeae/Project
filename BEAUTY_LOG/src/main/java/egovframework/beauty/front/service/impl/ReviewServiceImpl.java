@@ -34,7 +34,12 @@ public class ReviewServiceImpl implements ReviewService {
 
         return reviews;  // 리뷰 목록 반환
     }
-
+   
+    @Override
+    public double getAverageRating(Long prdSn) throws Exception {
+        return reviewMapper.getAverageRating(prdSn);
+    }
+    
     @Override
     public List<ReviewVO> list(ReviewVO reviewVO) throws Exception {
         return reviewMapper.list(reviewVO);

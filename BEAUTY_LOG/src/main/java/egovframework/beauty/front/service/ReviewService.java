@@ -19,6 +19,8 @@ public interface ReviewService {
     // 리뷰 상세 조회
     ReviewVO get(Long reviewSn) throws Exception;  
     
+    double getAverageRating(Long prdSn) throws Exception;
+   
     String getProductNameBySn(Long prdSn);
 
     // 상품 설명 조회

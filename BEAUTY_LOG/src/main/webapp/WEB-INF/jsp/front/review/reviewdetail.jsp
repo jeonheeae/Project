@@ -172,6 +172,7 @@
         </header>
         <!-- E : header -->
 
+<!-- E : review-detail -->
 <main class="main review-detail w-100">
     <div class="container pt-5">
         <h3 class="fw-bold">Review 상세보기</h3>
@@ -182,15 +183,29 @@
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-5">
-                            <!-- 제품 이미지 Placeholder -->  
-                            <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#868e96" />
-                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
-                            </svg>
-                        </div>
+						    <c:choose>
+						        <c:when test="${not empty productImages}">
+						            <c:forEach var="img" items="${productImages}" varStatus="loop">
+						                <c:if test="${loop.index == 0}">
+						                    <!-- 첫 번째 제품 이미지만 보여주기 -->
+						                    <img src="<c:url value='/images/front/product/${img}' />" 
+						                         alt="제품 이미지" 
+						                         style="width: 100%; height: 250px; object-fit: cover;" />
+						                </c:if>
+						            </c:forEach>
+						        </c:when>
+						        <c:otherwise>
+						            <!-- 이미지 없을 때 기존 Placeholder 유지 -->
+						            <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"
+						                role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice"
+						                focusable="false">
+						                <title>Placeholder</title>
+						                <rect width="100%" height="100%" fill="#868e96" />
+						                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
+						            </svg>
+						        </c:otherwise>
+						    </c:choose>
+						</div>
                         <div class="col-md-7 d-flex align-items-center">
                             <div class="card-body">
                                 <h5 class="card-title fw-semibold">${productName}</h5> <!-- 제품 이름 -->
@@ -269,7 +284,6 @@
         <!-- E : 리뷰 목록 -->
     </div>
 </main>
-
 <!-- E : review-detail -->
 
 
