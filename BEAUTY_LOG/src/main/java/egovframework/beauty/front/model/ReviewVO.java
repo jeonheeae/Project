@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +22,8 @@ public class ReviewVO {
 
     private int reviewSn;
     private Long prdSn;
-    private String prdNm;  
+    private String prdNm; 
+    private List<String> productImages;
     private String prdDesc;
     private BigDecimal rating;
     private int reviewCount;
@@ -29,6 +31,8 @@ public class ReviewVO {
     private String content;
     private int userSn;
     private Timestamp regDate;
+    private String capacity;
+    private int price;
 
     // 페이징 관련 필드 추가
     private int firstIndex;

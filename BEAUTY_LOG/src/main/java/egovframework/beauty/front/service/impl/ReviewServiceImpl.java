@@ -1,6 +1,7 @@
 package egovframework.beauty.front.service.impl;
 
 import java.util.List;
+import java.util.ArrayList;  // ArrayList 추가
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import egovframework.beauty.front.service.mapper.ReviewMapper;
@@ -80,11 +81,11 @@ public class ReviewServiceImpl implements ReviewService {
             throw new Exception("리뷰 삭제에 실패했습니다.", e);
         }
     }
+
     @Override
     public String getProductNameBySn(Long prdSn) {
         return reviewMapper.selectProductNameBySn(prdSn);
     }
-    
     
     // 제품명으로 리뷰 검색
     @Override
@@ -94,5 +95,21 @@ public class ReviewServiceImpl implements ReviewService {
         } catch (Exception e) {
             throw new Exception("제품명으로 리뷰 검색에 실패했습니다.", e);
         }
+    }
+
+    @Override
+    public List<ReviewVO> getRankedProducts() throws Exception {
+        return reviewMapper.getRankedProducts();
+    }
+
+    // 제품 이미지 목록 가져오는 메소드 구현
+    @Override
+    public List<String> getProductImagesForReview(Long prdSn) throws Exception {
+        List<String> productImages = new ArrayList<>();  // 빈 리스트 초기화
+
+        // DB에서 prdSn에 해당하는 이미지 목록을 가져오는 메소드 호출
+        productImages = reviewMapper.getProductImagesByPrdSn(prdSn);
+        
+        return productImages;  // 이미지 목록 반환
     }
 }

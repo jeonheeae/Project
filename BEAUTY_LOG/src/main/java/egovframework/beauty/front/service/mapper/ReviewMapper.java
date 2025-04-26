@@ -29,10 +29,13 @@ public interface ReviewMapper {
     List<ReviewVO> searchByProductName(String productName) throws Exception;
 
     // 제품 번호로 리뷰 조회
-    List<ReviewVO> selectReviewsByProduct(Long prdSn);  // 여기서 파라미터 타입을 Long으로 수정
-
+    List<ReviewVO> selectReviewsByProduct(Long prdSn);  
+    
+    List<ReviewVO> getRankedProducts() throws Exception;
+    
     String selectProductNameBySn(Long prdSn);  
-    String selectProductDescriptionBySn (Long prdSn); 
-    
-    
+    String selectProductDescriptionBySn(Long prdSn); 
+
+    // 제품 이미지 목록 조회
+    List<String> getProductImagesByPrdSn(Long prdSn); 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -171,79 +171,79 @@
         </header>
         <!-- E : header -->
 
-        <!-- S : Rank -->
-        <main class="main w-100">
-            <div class="container pt-5">
-                <h3 class="fw-bold">Rank</h3>
-                <div class="table-wrap text-center">
-                    <table class="table table-striped">
-                        <colgroup>
-                            <col style="width: 5%;">
-                            <col style="width: 30%;">
-                            <col style="width: 30%;">
-                            <col style="width: 15%;">
-                            <col style="width: 10%;">
-                            <col style="width: 10%;">
-                        </colgroup>
-                        <thead>
-                            <tr class="table-dark">
-                                <th scope="col">순위</th>
-                                <th scope="col">제품사진</th>
-                                <th scope="col">제품명</th>
-                                <th scope="col">별점</th>
-                                <th scope="col">용량</th>
-                                <th scope="col">가격</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td><img src="" alt="제품A"></td>
-                                <td class="text-start">제품A</td>
-                                <td>
+<!-- S : Rank -->
+<main class="main w-100">
+    <div class="container pt-5">
+        <h3 class="fw-bold">Rank</h3>
+        <div class="table-wrap text-center">
+            <table class="table table-striped">
+                <colgroup>
+                    <col style="width: 5%;">
+                    <col style="width: 30%;">
+                    <col style="width: 30%;">
+                    <col style="width: 15%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                </colgroup>
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">순위</th>
+                        <th scope="col">제품사진</th>
+                        <th scope="col">제품명</th>
+                        <th scope="col">별점</th>
+                        <th scope="col">용량</th>
+                        <th scope="col">가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="item" items="${rankedList}" varStatus="loop">
+                        <tr>
+                            <th scope="row">${loop.index + 1}</th>
+                            
+                            <!-- 썸네일 이미지: productImages가 있을 경우만 출력 -->
+							<td>
+							    <c:if test="${not empty item.productImages}">
+							        <c:forEach var="img" items="${item.productImages}">
+							            <img src="<c:url value='/images/front/product/${img}' />" alt="제품 사진" style="width: 80px; height: auto;">
+							        </c:forEach>
+							    </c:if>
+							</td>
+                            
+                            <!-- 제품명 -->
+                            <td class="text-start">${item.prdNm}</td>
+                            
+                            <!-- 별점 -->
+                            <td>
+                                <c:forEach begin="1" end="${item.rating.intValue()}">
                                     <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i> (4.9점)
-                                </td>
-                                <td>100g</td>
-                                <td>10,000원</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td><img src="" alt="제품B"></td>
-                                <td class="text-start">제품B</td>
-                                <td>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i> (4.5점)
-                                </td>
-                                <td>150g</td>
-                                <td>15,000원</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td><img src="" alt="제품C"></td>
-                                <td class="text-start">제품C</td>
-                                <td>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i> (4.0점)
-                                </td>
-                                <td>200g</td>
-                                <td>8,000원</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-        <!-- E : Rank -->
+                                </c:forEach>
+                                <c:if test="${item.rating.doubleValue() - item.rating.intValue() >= 0.5}">
+                                    <i class="bi bi-star-half"></i>
+                                </c:if>
+                                (${item.rating}점)
+                            </td>
+                            
+                            <!-- 용량 -->
+                            <td>${item.capacity}</td>
+                            
+                            <!-- 가격: 0이면 미정 -->
+                            <td>
+                                <c:choose>
+                                    <c:when test="${item.price > 0}">
+                                        <fmt:formatNumber value="${item.price}" type="number" pattern="#,###"/>원
+                                    </c:when>
+                                    <c:otherwise>
+                                        미정
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
         <!-- S : footer -->
         <div class="container">
