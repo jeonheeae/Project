@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -226,53 +227,68 @@
                 <!-- E : 슬라이드 -->
 
                 <div class="container marketing">
-                    <!-- S : 소개 -->
-                    <div class="row intro text-center">
-                        <div class="col-lg-3">
-                            <img src="${pageContext.request.contextPath}/images/front/main/intro01.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                            <p class="fw-semibold mt-4">🏆 랭킹</p>
-                        </div>
-                        <div class="col-lg-3">
-                            <img src="${pageContext.request.contextPath}/images/front/main/intro02.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                            <p class="fw-semibold mt-4">🎖️ 뷰티 어워드</p>
-                        </div>
-                        <div class="col-lg-3">
-                            <img src="${pageContext.request.contextPath}/images/front/main/intro03.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
-                            <p class="fw-semibold mt-4">🧴 베스트 신제품</p>
-                        </div>
-                        <div class="col-lg-3">
-                            <img src="${pageContext.request.contextPath}/images/front/main/intro04.jpg"  class="bd-placeholder-img rounded-circle" width="140" height="140">
-                            <p class="fw-semibold mt-4">💆🏻 효능/효과</p>
-                        </div>
-                    </div>
-                    <!-- E : 소개 -->
+				    <!-- S : 소개 -->
+				    <div class="row intro text-center">
+				        <div class="col-lg-3">
+						    <a href="<c:url value='/front/rank.do'/>">
+						        <img src="${pageContext.request.contextPath}/images/front/main/intro01.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+						    </a>
+						    <p class="fw-semibold mt-4">🏆 랭킹</p>
+						</div>
+				        <div class="col-lg-3">
+				            <img src="${pageContext.request.contextPath}/images/front/main/intro02.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+				            <p class="fw-semibold mt-4">🎖️ 뷰티 어워드</p>
+				        </div>
+				        <div class="col-lg-3">
+				            <img src="${pageContext.request.contextPath}/images/front/main/intro03.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+				            <p class="fw-semibold mt-4">🧴 베스트 신제품</p>
+				        </div>
+				        <div class="col-lg-3">
+				            <img src="${pageContext.request.contextPath}/images/front/main/intro04.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140">
+				            <p class="fw-semibold mt-4">💆🏻 효능/효과</p>
+				        </div>
+				    </div>
+				    <!-- E : 소개 -->
                     
-                    
-                    <!-- S : 조회수 급상승 -->
-                    <div class="row featurette">
-                        <h3 class="fw-bold">조회수 급상승</h3>
-                        <div class="col-md-4">
-                            <h4 class="fw-semibold mb-2">제품명01</h4>
-                            <p>가격 : 23,900원</p>
-                            <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                            <img src="${pageContext.request.contextPath}/images/front/main/product01.jpg"class="bd-placeholder-img" width="400" height="400">
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="fw-semibold mb-2">제품명02</h4>
-                            <p>가격 : 23,900원</p>
-                            <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                            <img src="${pageContext.request.contextPath}/images/front/main/product02.jpg" class="bd-placeholder-img" width="400" height="400">
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="fw-semibold mb-2">제품명03</h4>
-                            <p>가격 : 23,900원</p>
-                            <p class="mb-4 d-flex align-items-center"><i class="bi bi-star-fill me-2"></i></i><span class="grade me-1">4.7</span><span class="review-num">(16,114)</span></p>
-                            <img src="${pageContext.request.contextPath}/images/front/main/product03.jpg" class="bd-placeholder-img" width="400" height="400">
-                        </div>
-                    </div>
-                </div>
-                <!-- S : 조회수 급상승 -->
-            </main>
+<!-- S : 조회수 급상승 -->
+<!-- S : 조회수 급상승 -->
+<div class="row featurette">
+    <h3 class="fw-bold">조회수 급상승</h3>
+    <c:forEach var="product" items="${top3Products}" varStatus="status">
+        <div class="col-md-4">
+            <h4 class="fw-semibold mb-2">${product.prdNm}</h4>
+            <p>
+                <c:choose>
+                    <c:when test="${product.price > 0}">
+                        <fmt:formatNumber value="${product.price}" type="number" pattern="#,###"/>원
+                    </c:when>
+                    <c:otherwise>
+                        미정
+                    </c:otherwise>
+                </c:choose>
+            </p>
+            <p class="mb-4 d-flex align-items-center">
+                <i class="bi bi-star-fill me-2"></i>
+                <span class="grade me-1">${product.rating}</span>
+                <span class="review-num">(${product.reviewCount})</span>
+            </p>
+
+            <!-- 이미지 클릭 시 상세 페이지로 이동 -->
+            <a href="${pageContext.request.contextPath}/front/review/detail.do?prdSn=${product.prdSn}">
+                <!-- 순위대로 이미지를 표시 -->
+                <img src="${pageContext.request.contextPath}/images/front/product/product${product.prdSn}.jpg"
+                     class="bd-placeholder-img" width="400" height="400" alt="${product.prdNm}">
+            </a>
+        </div>
+    </c:forEach>    
+</div>
+
+<!-- S : 조회수 급상승 -->
+
+<!-- S : 조회수 급상승 -->
+
+
+				</main>
 
 
             <!-- S : footer -->

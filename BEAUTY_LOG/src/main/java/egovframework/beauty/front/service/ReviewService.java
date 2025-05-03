@@ -42,4 +42,7 @@ public interface ReviewService {
     
     // 제품 이미지 목록 조회 추가
     List<String> getProductImagesForReview(Long prdSn) throws Exception; // 추가된 메소드
+
+    List<ReviewVO> getTop3ProductsByView();
+
 }

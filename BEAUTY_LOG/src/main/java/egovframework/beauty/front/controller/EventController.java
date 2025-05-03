@@ -70,8 +70,6 @@ public class EventController {
         return mav;
     }
 
-
-
     // 출석체크 처리
     @RequestMapping(value="/attendanceCheck.do", method = {RequestMethod.POST})
     public void attendanceCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {

@@ -86,7 +86,8 @@ public class LoginController {
             } else {
                 // 로그인 성공, 사용자 세션 정보 저장
                 session.setAttribute("userId", rs.getUserId());
-                session.setAttribute("userSn", rs.getUserSn()); // userSn 저장!!
+                session.setAttribute("userSn", rs.getUserSn()); 
+                session.setAttribute("userName", rs.getUserName());
                 return "redirect:/index.do"; 
             }
 

@@ -133,4 +133,26 @@
     WHERE PRD_SN = #{prdSn}
 </select>
 
+<select id="selectTop3ProductsByView" resultType="egovframework.beauty.front.model.ReviewVO">
+    SELECT 
+        p.PRD_SN AS prdSn,
+        p.PRD_NM AS prdNm,
+        p.PRD_DESC AS prdDesc,
+        p.PRICE AS price,
+        p.CAPACITY AS capacity,
+        ROUND(AVG(r.rating), 1) AS rating,
+        COUNT(r.reviewSn) AS reviewCount
+    FROM 
+        tb_product p
+    LEFT JOIN 
+        tb_review r ON p.PRD_SN = r.prdSn
+    GROUP BY 
+        p.PRD_SN, p.PRD_NM, p.PRD_DESC, p.PRICE, p.CAPACITY
+    ORDER BY 
+        rating DESC
+    LIMIT 3
+</select>
+
+
+
 </mapper>

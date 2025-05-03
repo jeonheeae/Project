@@ -40,4 +40,6 @@ public interface ReviewMapper {
     List<String> getProductImagesByPrdSn(Long prdSn);
 
 	double getAverageRating(Long prdSn); 
+	
+	List<ReviewVO> selectTop3ProductsByView();
 }

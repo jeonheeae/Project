@@ -117,4 +117,8 @@ public class ReviewServiceImpl implements ReviewService {
         
         return productImages;  // 이미지 목록 반환
     }
+    @Override
+    public List<ReviewVO> getTop3ProductsByView() {
+        return reviewMapper.selectTop3ProductsByView();
+    }
 }
