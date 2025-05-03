@@ -113,6 +113,7 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
+        
     </style>
 </head>
 
@@ -197,21 +198,22 @@
                 </thead>
                 <tbody>
                     <c:forEach var="item" items="${rankedList}" varStatus="loop">
-                        <tr>
+                        <tr onclick="window.location.href='${pageContext.request.contextPath}/front/review/detail.do?prdSn=${item.prdSn}'">
+                            <!-- 순위 -->
                             <th scope="row">${loop.index + 1}</th>
-                            
-                            <!-- 썸네일 이미지: productImages가 있을 경우만 출력 -->
-							<td>
-							    <c:if test="${not empty item.productImages}">
-							        <c:forEach var="img" items="${item.productImages}">
-							            <img src="<c:url value='/images/front/product/${img}' />" alt="제품 사진" style="width: 80px; height: auto;">
-							        </c:forEach>
-							    </c:if>
-							</td>
+
+                            <!-- 썸네일 이미지 -->
+                            <td>
+                                <c:if test="${not empty item.productImages}">
+                                    <c:forEach var="img" items="${item.productImages}">
+                                        <img src="<c:url value='/images/front/product/${img}' />" alt="제품 사진" style="width: 80px; height: auto;">
+                                    </c:forEach>
+                                </c:if>
+                            </td>
                             
                             <!-- 제품명 -->
                             <td class="text-start">${item.prdNm}</td>
-                            
+
                             <!-- 별점 -->
                             <td>
                                 <c:forEach begin="1" end="${item.rating.intValue()}">
@@ -222,11 +224,11 @@
                                 </c:if>
                                 (${item.rating}점)
                             </td>
-                            
+
                             <!-- 용량 -->
                             <td>${item.capacity}</td>
-                            
-                            <!-- 가격: 0이면 미정 -->
+
+                            <!-- 가격 -->
                             <td>
                                 <c:choose>
                                     <c:when test="${item.price > 0}">
@@ -244,6 +246,10 @@
         </div>
     </div>
 </main>
+<!-- S : Rank -->
+
+
+
 
         <!-- S : footer -->
         <div class="container">
