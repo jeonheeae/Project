@@ -245,7 +245,7 @@
 		
 		        <!-- 버튼들 -->
 		        <div class="btn-group w-100">
-		            <button class="btn btn-outline-primary" type="button" onclick="window.location.href='<c:url value='/front/index.do'/>'">이전</button>
+		            <button class="btn btn-outline-primary" type="button" onclick="window.location.href='<c:url value='/index.do'/>'">이전</button>
 		            <button class="btn btn-primary" type="submit">회원가입</button>
 		        </div>
 		    </form>
