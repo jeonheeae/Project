@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -114,6 +116,13 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
+      
+		.page-item.active .page-link {
+		    background-color: #f8f9fa;
+		    color: #E11D48;
+		    border-color:#ddd;
+
+		}
     </style>
 </head>
 
@@ -228,25 +237,35 @@
 			            <i class="bi bi-pencil-square me-1"></i> 글쓰기
 			        </a>
 			    </div>
-			    	
-					<!-- 페이징 처리 -->
-					<nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <c:forEach var="i" begin="1" end="${totalPages}">
-						    <li class="page-item">
-						        <a class="page-link" href="<c:url value='/front/qna.do?page=${i}' />">${i}</a>
-						    </li>
-						</c:forEach>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+							    	
+				<!-- 페이징 처리 -->
+				<nav aria-label="Page navigation">
+				    <ul class="pagination justify-content-center">
+				        
+				        <!-- 이전 페이지 버튼 -->
+				        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+				            <a class="page-link" href="<c:url value='/front/qna.do?page=${currentPage - 1 > 0 ? currentPage - 1 : 1}' />" aria-label="Previous">
+				                <span aria-hidden="true">&laquo;</span>
+				            </a>
+				        </li>
+				        
+				        <!-- 페이지 번호들 -->
+				        <c:set var="currentPage" value="${param.page != null && param.page > 0 ? param.page : 1}" />
+				        
+				        <c:forEach var="i" begin="1" end="${totalPages}">
+				            <li class="page-item ${currentPage == i ? 'active' : ''}">
+				                <a class="page-link" href="<c:url value='/front/qna.do?page=${i}' />">${i}</a>
+				            </li>
+				        </c:forEach>
+				
+				        <!-- 다음 페이지 버튼 -->
+				        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+				            <a class="page-link" href="<c:url value='/front/qna.do?page=${currentPage + 1 <= totalPages ? currentPage + 1 : totalPages}' />" aria-label="Next">
+				                <span aria-hidden="true">&raquo;</span>
+				            </a>
+				        </li>
+				    </ul>
+				</nav>
             </div>
         </main>
         <!-- E : qna -->
