@@ -15,7 +15,9 @@
             u.userId,
             q.createdAt,
             q.updatedAt,
-            q.status
+            q.status,
+	    q.viewCount,
+	    q.fileName
         FROM tb_qna q
         JOIN tb_user u ON q.userSn = u.userSn
         ORDER BY q.createdAt DESC
@@ -28,6 +30,20 @@
         WHERE qnaId = #{qnaId}
     </update>
 
+    <!-- 페이징 추가 -->
+<select id="listPaging" resultType="egovframework.beauty.front.model.QnaVO" parameterType="map">
+    SELECT q.qnaId, q.title, q.content, q.userSn, u.userId, q.createdAt, q.updatedAt, q.status, q.viewCount, q.fileName
+    FROM tb_qna q
+    JOIN tb_user u ON q.userSn = u.userSn
+    ORDER BY q.createdAt DESC
+    LIMIT #{offset}, #{limit}
+</select>
+
+<!-- QnA 전체 개수 조회 -->
+<select id="listCnt" parameterType="egovframework.beauty.front.model.QnaVO" resultType="int">
+    SELECT COUNT(*) FROM tb_qna
+</select>
+
     <!-- QnA 상세 -->
     <select id="get" parameterType="egovframework.beauty.front.model.QnaVO"
             resultType="egovframework.beauty.front.model.QnaVO">
@@ -39,17 +55,19 @@
             u.userId,
             q.createdAt,
             q.updatedAt,
-            q.status
+            q.status,
+   	    q.viewCount,
+ 	    q.fileName
         FROM tb_qna q
         JOIN tb_user u ON q.userSn = u.userSn
         WHERE q.qnaId = #{qnaId}
     </select>
 
     <!-- QnA 등록 -->
-    <insert id="add" parameterType="egovframework.beauty.front.model.QnaVO">
-        INSERT INTO tb_qna (title, content, userSn, createdAt, updatedAt, status)
-        VALUES (#{title}, #{content}, #{userSn}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE)
-    </insert>
+<insert id="add" parameterType="egovframework.beauty.front.model.QnaVO">
+    INSERT INTO tb_qna (title, content, userSn, createdAt, updatedAt, status, fileName)
+    VALUES (#{title}, #{content}, #{userSn}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE, #{fileName})
+</insert>
 
     <!-- QnA 수정 -->
     <update id="edit" parameterType="egovframework.beauty.front.model.QnaVO">

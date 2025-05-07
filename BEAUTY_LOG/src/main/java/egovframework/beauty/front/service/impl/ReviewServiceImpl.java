@@ -2,6 +2,7 @@ package egovframework.beauty.front.service.impl;
 
 import java.util.List;
 import java.util.ArrayList;  // ArrayList 추가
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import egovframework.beauty.front.service.mapper.ReviewMapper;
@@ -117,8 +118,11 @@ public class ReviewServiceImpl implements ReviewService {
         
         return productImages;  // 이미지 목록 반환
     }
+    // 상위랭킹 
     @Override
     public List<ReviewVO> getTop3ProductsByView() {
         return reviewMapper.selectTop3ProductsByView();
     }
+    
+
 }

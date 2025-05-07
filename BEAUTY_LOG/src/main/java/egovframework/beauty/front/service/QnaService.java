@@ -39,4 +39,8 @@ public interface QnaService {
 
     // 댓글 삭제
     int deleteComment(int commentId) throws Exception;
+
+    List<QnaVO> getQnaListWithPaging(int page, int size) throws Exception;
+
+    int getTotalCount() throws Exception;
 }

@@ -250,45 +250,40 @@
 				    </div>
 				    <!-- E : 소개 -->
                     
-<!-- S : 조회수 급상승 -->
-<!-- S : 조회수 급상승 -->
-<div class="row featurette">
-    <h3 class="fw-bold">조회수 급상승</h3>
-    <c:forEach var="product" items="${top3Products}" varStatus="status">
-        <div class="col-md-4">
-            <h4 class="fw-semibold mb-2">${product.prdNm}</h4>
-            <p>
-                <c:choose>
-                    <c:when test="${product.price > 0}">
-                        <fmt:formatNumber value="${product.price}" type="number" pattern="#,###"/>원
-                    </c:when>
-                    <c:otherwise>
-                        미정
-                    </c:otherwise>
-                </c:choose>
-            </p>
-            <p class="mb-4 d-flex align-items-center">
-                <i class="bi bi-star-fill me-2"></i>
-                <span class="grade me-1">${product.rating}</span>
-                <span class="review-num">(${product.reviewCount})</span>
-            </p>
-
-            <!-- 이미지 클릭 시 상세 페이지로 이동 -->
-            <a href="${pageContext.request.contextPath}/front/review/detail.do?prdSn=${product.prdSn}">
-                <!-- 순위대로 이미지를 표시 -->
-                <img src="${pageContext.request.contextPath}/images/front/product/product${product.prdSn}.jpg"
-                     class="bd-placeholder-img" width="400" height="400" alt="${product.prdNm}">
-            </a>
-        </div>
-    </c:forEach>    
-</div>
-
-<!-- S : 조회수 급상승 -->
-
-<!-- S : 조회수 급상승 -->
-
-
-				</main>
+					<!-- S : 조회수 급상승 -->
+					<div class="row featurette">
+					    <h3 class="fw-bold">조회수 급상승</h3>
+					    <c:forEach var="product" items="${top3Products}" varStatus="status">
+					        <div class="col-md-4">
+					            <h4 class="fw-semibold mb-2">${product.prdNm}</h4>
+					            <p>
+					                <c:choose>
+					                    <c:when test="${product.price > 0}">
+					                        <fmt:formatNumber value="${product.price}" type="number" pattern="#,###"/>원
+					                    </c:when>
+					                    <c:otherwise>
+					                        미정
+					                    </c:otherwise>
+					                </c:choose>
+					            </p>
+					            <p class="mb-4 d-flex align-items-center">
+					                <i class="bi bi-star-fill me-2"></i>
+					                <span class="grade me-1">${product.rating}</span>
+					                <span class="review-num">(${product.reviewCount})</span>
+					            </p>
+					
+					            <!-- 이미지 클릭 시 상세 페이지로 이동 -->
+					            <a href="${pageContext.request.contextPath}/front/review/detail.do?prdSn=${product.prdSn}">
+					                <!-- 순위대로 이미지를 표시 -->
+					                <img src="${pageContext.request.contextPath}/images/front/product/product${product.prdSn}.jpg"
+					                     class="bd-placeholder-img" width="400" height="400" alt="${product.prdNm}">
+					            </a>
+					        </div>
+					    </c:forEach>    
+					</div>
+					</div>
+					<!-- S : 조회수 급상승 -->
+					</main>
 
 
             <!-- S : footer -->

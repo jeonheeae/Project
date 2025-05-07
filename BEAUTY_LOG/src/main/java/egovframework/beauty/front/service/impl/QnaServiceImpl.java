@@ -1,6 +1,8 @@
 package egovframework.beauty.front.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +95,19 @@ public class QnaServiceImpl implements QnaService {
     @Override
     public int deleteComment(int commentId) throws Exception {
         return qnaMapper.deleteComment(commentId); // deleteComment() 메소드 호출
+    }
+    
+    //페이징
+    @Override
+    public List<QnaVO> getQnaListWithPaging(int page, int size) throws Exception {
+        Map<String, Object> params = new HashMap<>();
+        params.put("offset", (page - 1) * size);
+        params.put("limit", size);
+        return qnaMapper.listPaging(params);
+    }
+    
+    @Override
+    public int getTotalCount() throws Exception {
+        return qnaMapper.listCnt(new QnaVO());
     }
 }

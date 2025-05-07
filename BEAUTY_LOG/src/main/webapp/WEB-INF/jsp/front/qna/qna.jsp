@@ -8,10 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
-	
-	
-  
-    
+ 
     <!-- S : 파비콘 -->
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/front/favicon/apple-touch-icon.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/front/favicon/favicon-32x32.png' />">
@@ -206,7 +203,18 @@
 					            <td><a href="<c:url value='/front/qnadetail.do?qnaId=${qna.qnaId}' />">${qna.title}</a></td>
 					            <td>${qna.userId}</td>
 					            <td><fmt:formatDate value="${qna.createdAt}" pattern="yyyy-MM-dd" /></td>
-					            <td>-</td>
+					            <td>
+								    <c:choose>
+								        <c:when test="${not empty qna.fileName}">
+								            <a href="${pageContext.request.contextPath}/front/qnaDownload.do?fileName=${qna.fileName}">
+								                <i class="bi bi-paperclip"></i>
+								            </a>
+								        </c:when>
+								        <c:otherwise>
+								            -
+								        </c:otherwise>
+								    </c:choose>
+								</td>
 					            <td>${qna.viewCount}</td> 
 					        </tr>
 					    </c:forEach>
@@ -224,11 +232,11 @@
 					<!-- 페이징 처리 -->
 					<nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
+                        <c:forEach var="i" begin="1" end="${totalPages}">
+						    <li class="page-item">
+						        <a class="page-link" href="<c:url value='/front/qna.do?page=${i}' />">${i}</a>
+						    </li>
+						</c:forEach>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                         <li class="page-item"><a class="page-link" href="#">3</a></li>

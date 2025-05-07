@@ -208,15 +208,34 @@
                                               ${qnaDetail.viewCount}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="px-5 py-2">
-                                            <span class="me-3 fw-semibold">첨부파일</span> 
-                                            첨부파일 없음
-                                            <button type="button" class="btn btn-outline-primary btn-sm ms-3">
-                                                <i class="bi bi-download"></i> 다운로드
-                                            </button>
-                                        </td>
-                                    </tr>
+								    <tr>
+								    <tr>
+									    <td class="px-5 py-2">
+									        <span class="me-3 fw-semibold">첨부파일</span>
+									        <c:choose>
+									            <c:when test="${not empty qnaDetail.fileName}">
+									                ${qnaDetail.fileName}
+									                <c:choose>               
+									                    <c:when test="${qnaDetail.fileName.endsWith('.jpg') || qnaDetail.fileName.endsWith('.png') || qnaDetail.fileName.endsWith('.gif')}">
+									                        <br>
+									                        <img src="${pageContext.request.contextPath}/front/qnaDownload.do?fileName=${qnaDetail.fileName}" alt="첨부 이미지" class="img-fluid mt-2" style="max-width: 200px;">
+									                    </c:when>           
+									                    <c:when test="${qnaDetail.fileName.endsWith('.pdf')}">
+									                        <br>
+									                        <embed src="${pageContext.request.contextPath}/front/qnaDownload.do?fileName=${qnaDetail.fileName}" type="application/pdf" width="100%" height="400px">
+									                    </c:when>
+									                </c:choose>
+									                <a href="${pageContext.request.contextPath}/front/qnaDownload.do?fileName=${qnaDetail.fileName}"
+									                   class="btn btn-outline-primary btn-sm ms-3">
+									                    <i class="bi bi-download"></i> 다운로드
+									                </a>
+									            </c:when>
+									            <c:otherwise>
+									                첨부파일 없음
+									            </c:otherwise>
+									        </c:choose>
+									    </td>
+									</tr>
                                     <tr>
                                         <td class="px-5 py-5">
                                             <pre>

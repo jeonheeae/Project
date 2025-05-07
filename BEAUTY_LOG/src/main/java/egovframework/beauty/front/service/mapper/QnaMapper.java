@@ -1,6 +1,7 @@
 package egovframework.beauty.front.service.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
@@ -41,5 +42,10 @@ public interface QnaMapper {
     int deleteComment(int commentId) throws Exception;
 
     // 조회수 증가
-    void updateQnaViewCount(int qnaId) throws Exception; // 조회수 증가를 위한 메서드
+    void updateQnaViewCount(int qnaId) throws Exception;
+    
+    // 페이징 처리
+    List<QnaVO> listPaging(Map<String, Object> params) throws Exception;
+    
+    
 }
