@@ -1,8 +1,7 @@
 // 공통 로그인 알림 및 리다이렉트
 function showLoginPrompt() {
     alert("로그인이 필요합니다.");
-    var contextPath = "/" + window.location.pathname.split('/')[1];
-    location.href = contextPath + "/front/login.do";
+    location.href = "/front/login.do";
 }
 
 // Q & A 글쓰기 버튼 클릭 시 로그인 체크
@@ -10,8 +9,7 @@ function checkLogin(userId) {
     if (!userId) {
         showLoginPrompt();  
     } else {
-        var contextPath = "/" + window.location.pathname.split('/')[1];
-        location.href = contextPath + "/front/qnaWrite.do"; 
+        location.href = "/front/qnaWrite.do"; 
     }
 }
 
@@ -42,6 +40,6 @@ function checkAttendance() {
 // 리뷰 삭제 확인
 function deleteReview(reviewSn, prdSn) {
     if (confirm("정말 삭제하시겠습니까?")) {
-        window.location.href = `/front/review/delete.do?reviewSn=${reviewSn}&prdSn=${prdSn}`;
+        location.href = "/front/reviewDelete.do?reviewSn=" + reviewSn + "&prdSn=" + prdSn;
     }
 }
