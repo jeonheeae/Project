@@ -95,7 +95,7 @@ public class QnaController {
         Integer userSn = (Integer) session.getAttribute("userSn");
 
         if (userId == null || userSn == null) {
-            return "redirect:/front/login.do";
+            return "redirect:/login.do";  // ✅ 수정됨
         }
 
         qnaVO.setUserId(userId);
@@ -118,7 +118,7 @@ public class QnaController {
         Integer userSn = (Integer) session.getAttribute("userSn");
 
         if (userSn == null) {
-            return "redirect:/front/login.do";
+            return "redirect:/login.do";  // ✅ 수정됨
         }
 
         commentVO.setUserSn(userSn);
@@ -134,27 +134,27 @@ public class QnaController {
 
     // 첨부파일 다운로드 처리
     @RequestMapping(
-    	    value = "/qnaDownload.do",
-    	    method = RequestMethod.GET,
-    	    produces = "application/octet-stream"
-    	)
-    	public ResponseEntity<Resource> downloadQnaFile(@RequestParam("fileName") String fileName) throws IOException {
-    	    String uploadDir = "C:/uploadPath/";
-    	    Path filePath = Paths.get(uploadDir).resolve(fileName).normalize();
-    	    Resource resource = new UrlResource(filePath.toUri());
+        value = "/qnaDownload.do",
+        method = RequestMethod.GET,
+        produces = "application/octet-stream"
+    )
+    public ResponseEntity<Resource> downloadQnaFile(@RequestParam("fileName") String fileName) throws IOException {
+        String uploadDir = "C:/uploadPath/";
+        Path filePath = Paths.get(uploadDir).resolve(fileName).normalize();
+        Resource resource = new UrlResource(filePath.toUri());
 
-    	    if (!resource.exists() || !resource.isReadable()) {
-    	        throw new IOException("파일을 찾을 수 없거나 읽을 수 없습니다: " + fileName);
-    	    }
+        if (!resource.exists() || !resource.isReadable()) {
+            throw new IOException("파일을 찾을 수 없거나 읽을 수 없습니다: " + fileName);
+        }
 
-    	    String encodedName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+        String encodedName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
 
-    	    return ResponseEntity.ok()
-    	        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedName + "\"")
-    	        .header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
-    	        .header(HttpHeaders.PRAGMA, "no-cache")
-    	        .header(HttpHeaders.EXPIRES, "0")
-    	        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-    	        .body(resource);
-    	}
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedName + "\"")
+            .header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
+            .header(HttpHeaders.PRAGMA, "no-cache")
+            .header(HttpHeaders.EXPIRES, "0")
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .body(resource);
+    }
 }

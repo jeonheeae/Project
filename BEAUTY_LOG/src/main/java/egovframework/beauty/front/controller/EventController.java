@@ -56,7 +56,7 @@ public class EventController {
                 .collect(Collectors.toSet());
 
         // 출석 횟수 계산
-        int attendanceCount = attendedDays.size();  // 출석한 날짜 수를 계산
+        int attendanceCount = attendedDays.size();
 
         // ModelAndView에 데이터 추가
         mav.addObject("attendedDaySet", attendedDaySet);
@@ -65,7 +65,7 @@ public class EventController {
         mav.addObject("today", today.getDayOfMonth());
         mav.addObject("lastDayOfMonth", lastDayOfMonth);
         mav.addObject("attendedDays", attendedDays);
-        mav.addObject("attendanceCount", attendanceCount);  // 출석 횟수 추가
+        mav.addObject("attendanceCount", attendanceCount);
 
         return mav;
     }
@@ -80,7 +80,7 @@ public class EventController {
 
         // 로그인 안했을 때 처리
         if(userSn == null) {
-            writer.println("<script>alert('로그인이 필요합니다.'); location.href='/BEAUTY_LOG/front/login.do';</script>");
+            writer.println("<script>alert('로그인이 필요합니다.'); location.href='/front/login.do';</script>");
             writer.flush();
             writer.close();
             return;
@@ -89,9 +89,8 @@ public class EventController {
         // 출석체크 처리
         String result = eventService.attendanceCheck(userSn);
 
-        writer.println("<script>alert('"+ result +"'); location.href='/BEAUTY_LOG/front/event.do';</script>");
+        writer.println("<script>alert('" + result + "'); location.href='/front/event.do';</script>");
         writer.flush();
         writer.close();
     }
-
 }
