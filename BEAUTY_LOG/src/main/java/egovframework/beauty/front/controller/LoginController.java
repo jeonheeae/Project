@@ -88,7 +88,7 @@ public class LoginController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/front/login.do";  // 여기도 수정!
+            return "redirect:/front/login.do";  
         }
     }
 

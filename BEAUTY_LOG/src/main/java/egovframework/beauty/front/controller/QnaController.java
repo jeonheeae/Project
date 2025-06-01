@@ -95,7 +95,7 @@ public class QnaController {
         Integer userSn = (Integer) session.getAttribute("userSn");
 
         if (userId == null || userSn == null) {
-            return "redirect:/login.do";  // ✅ 수정됨
+            return "redirect:/front/login.do";  
         }
 
         qnaVO.setUserId(userId);
@@ -118,7 +118,7 @@ public class QnaController {
         Integer userSn = (Integer) session.getAttribute("userSn");
 
         if (userSn == null) {
-            return "redirect:/login.do";  // ✅ 수정됨
+            return "redirect:/front/login.do"; 
         }
 
         commentVO.setUserSn(userSn);
